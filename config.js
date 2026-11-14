@@ -7,7 +7,7 @@
 window.UBUZIMA_CONFIG = {
   apiBaseUrl: "http://localhost:4000",
   whatsappNumber: "254792965970",
-  currency: "BI",
+  currency: "Fbu",
   pharmacyName: "UBUZIMA PHARMA",
   website: "https://ubuzimapharma.com",
   address: "Kinama, i Gitega, 10é avenue, numéro 57"
