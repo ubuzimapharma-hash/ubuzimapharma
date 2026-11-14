@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vugana na UBUZIMA PHARMA i Kinama, Gitega. Tubaze ibijanye n'imiti, ibicuruzwa vya farumasi n'uko bihagaze.">
+  <meta name="theme-color" content="#0b3678">
+  <title>Twandikire | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .contact-content {
+      --primary: #0b3678;
+      --primary-light: #edf4ff;
+      --accent: #25d366;
+      --accent-hover: #1eae53;
+      --surface: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --shadow-md: 0 10px 30px rgba(11, 54, 120, 0.08);
+      --shadow-lg: 0 20px 40px rgba(11, 54, 120, 0.12);
+      --font-heading: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .contact-content .container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 1.5rem;
+    }
+
+    .contact-content .contact-page-hero {
+      padding: 4rem 0 5rem;
+      background: linear-gradient(180deg, var(--primary-light) 0%, #fff 100%);
+      overflow: hidden;
+    }
+
+    .contact-content .contact-hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      min-height: 0;
+      padding-top: 0;
+    }
+
+    .contact-content .section-kicker {
+      display: block;
+      width: auto;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact-content .contact-hero-copy h1 {
+      max-width: none;
+      margin: 0 0 1.25rem;
+      color: var(--text-dark);
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: normal;
+      line-height: 1.15;
+    }
+
+    .contact-content .contact-hero-copy h1 span,
+    .contact-content .section-heading h2 span {
+      color: var(--primary);
+    }
+
+    .contact-content .contact-hero-copy p {
+      max-width: 540px;
+      margin: 0 0 2rem;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .contact-content .contact-hero-copy {
+      padding: 0;
+    }
+
+    .contact-content .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 1rem 2rem;
+      border: 0;
+      border-radius: 50px;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .contact-content .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .contact-content .btn-primary:hover {
+      transform: translateY(-2px);
+      background: var(--accent-hover);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-content .contact-hero-visual {
+      position: relative;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      border-radius: 0;
+    }
+
+    .contact-content .contact-hero-visual img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      object-fit: cover;
+      object-position: initial;
+    }
+
+    .contact-content .contact-page-details {
+      padding: 4rem 0;
+    }
+
+    .contact-content .section-heading {
+      display: block;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+      text-align: center;
+    }
+
+    .contact-content .section-heading h2 {
+      margin: 0 0 0.5rem;
+      color: var(--text-dark);
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: normal;
+      line-height: 1.2;
+    }
+
+    .contact-content .section-heading p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .contact-content .contact-page-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 0 0 4rem;
+    }
+
+    .contact-content .contact-info-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: none;
+      transition: var(--transition);
+    }
+
+    .contact-content .contact-info-card:hover {
+      transform: translateY(-5px);
+      border-color: transparent;
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-content .contact-info-featured {
+      border: 2px solid var(--primary);
+      background: linear-gradient(180deg, #fff 0%, var(--primary-light) 100%);
+    }
+
+    .contact-content .contact-icon {
+      display: flex;
+      width: 54px;
+      height: 54px;
+      flex: none;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+
+    .contact-content .contact-info-card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--text-dark);
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      line-height: 1.4;
+    }
+
+    .contact-content .contact-info-card p {
+      flex-grow: 1;
+      max-width: none;
+      min-height: 0;
+      margin: 0 0 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .contact-content .contact-page-grid .contact-info-card:first-child p {
+      max-width: none;
+      min-height: 0;
+    }
+
+    .contact-content .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--primary);
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .contact-content .text-link:hover {
+      gap: 0.6rem;
+    }
+
+    .contact-content .contact-guidance {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      margin-top: 0;
+      margin-bottom: 3rem;
+      padding: 3rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--primary), #164ca7);
+      color: #fff;
+      gap: 2rem;
+    }
+
+    .contact-content .contact-guidance .section-kicker {
+      color: var(--accent);
+    }
+
+    .contact-content .contact-guidance h2 {
+      margin: 0 0 0.75rem;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      letter-spacing: normal;
+      line-height: 1.2;
+    }
+
+    .contact-content .contact-guidance-copy p {
+      max-width: none;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .contact-content .contact-guidance-copy,
+    .contact-content .contact-message-preview {
+      min-width: 0;
+    }
+
+    .contact-content .contact-message-preview {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-height: 0;
+      margin: 0;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      box-shadow: none;
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-content .contact-message-preview:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .contact-content .message-placeholder {
+      flex-grow: 1;
+      overflow: visible;
+      font-size: 0.95rem;
+      opacity: 0.75;
+      text-overflow: clip;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-content .message-send {
+      display: flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .contact-content .contact-safety-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 4px solid #f59e0b;
+      border-radius: var(--radius-sm);
+      background: #fff8e6;
+      color: #78350f;
+    }
+
+    .contact-content .safety-info-icon {
+      display: inline;
+      width: auto;
+      height: auto;
+      flex: none;
+      margin-top: 2px;
+      border-radius: 0;
+      background: none;
+      color: #d97706;
+      font-size: 1.2rem;
+    }
+
+    .contact-content .contact-safety-note p {
+      margin: 0;
+      color: #78350f;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 992px) {
+      .contact-content .contact-hero-grid,
+      .contact-content .contact-guidance {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-content .contact-page-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .contact-content .contact-page-hero {
+        padding: 3rem 0;
+      }
+
+      .contact-content .contact-hero-grid {
+        gap: 2rem;
+      }
+
+      .contact-content .contact-hero-copy {
+        padding: 0;
+      }
+
+      .contact-content .contact-hero-copy h1 {
+        font-size: 2.2rem;
+      }
+
+      .contact-content .contact-page-details {
+        padding: 3rem 0;
+      }
+
+      .contact-content .section-heading h2 {
+        font-size: 1.8rem;
+      }
+
+      .contact-content .contact-page-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-content .contact-info-card {
+        padding: 1.75rem;
+      }
+
+      .contact-content .contact-guidance {
+        gap: 1.5rem;
+        padding: 1.75rem;
+      }
+    }
+  </style>
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="topbar"><div class="container topbar-inner"><span>UBUZIMA PHARMA · KINAMA, GITEGA</span><span>Ubuzima bwanyu ni intego yacu.</span></div></div>
+  <header class="header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html#home" aria-label="UBUZIMA PHARMA home">
+        <span class="brand-mark"><span>✚</span><i></i></span>
+        <span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav id="mainNav">
+        <a href="index.html#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti</a><a href="values.html">Indangagaciro</a><a href="contact.html" aria-current="page">Twandikire</a>
+        <a class="nav-cta" href="/patient/">Injira nk'umurwayi <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contact-content">
+    <section class="contact-page-hero">
+      <div class="container contact-hero-grid">
+        <div class="contact-hero-copy">
+          <div class="section-kicker">TWANDIKIRE</div>
+          <h1>Turakwakira kandi <span>turakwumviriza.</span></h1>
+          <p>Ukeneye kumenya ko umuti uhari, kubaza igiciro canke kuronka amakuru yerekeye ibicuruzwa vya farumasi? Vugana natwe canke uze kuturaba i Kinama, Gitega.</p>
+          <a class="btn btn-primary contact-hero-button" id="contactWhatsApp" href="#">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Twandikire kuri WhatsApp <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="contact-hero-visual">
+          <img src="assets/contact-pharmacist-consultation.png" alt="Umufarumasiye aganira n'umukiriya muri UBUZIMA PHARMA" fetchpriority="high">
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-page-details">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">AHO TWOBONERA</div>
+          <h2>Vugana natwe canke <span>uze kuturaba.</span></h2>
+          <p>Turahari kugira tugufashe kuronka amakuru y'ibicuruzwa n'uko bihagaze.</p>
+        </div>
+
+        <div class="contact-page-grid">
+          <article class="contact-info-card">
+            <div class="contact-icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="section-kicker">AHO TURI</div>
+            <h3>Kinama, i Gitega</h3>
+            <p>10é avenue, numéro 57<br>Gitega, Burundi</p>
+            <a class="text-link" href="https://www.google.com/maps/search/?api=1&amp;query=UBUZIMA+PHARMA+Kinama+Gitega+Burundi" target="_blank" rel="noopener noreferrer">
+              Raba ikarata <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i>
+            </a>
+          </article>
+
+          <article class="contact-info-card contact-info-featured">
+            <div class="contact-icon" style="background: #25d366; color: white;" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="section-kicker">WHATSAPP</div>
+            <h3>Tubaze ibibazo vyawe</h3>
+            <p>Twohereze ubutumwa kugira umenye ko umuti uhari n'igiciro cawo. Ivyo tubitse birashobora guhinduka.</p>
+            <a class="text-link" id="contactWhatsAppSecondary" href="#">
+              <i class="fa-brands fa-whatsapp"></i> Twandikire kuri WhatsApp <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
+            </a>
+          </article>
+
+          <article class="contact-info-card">
+            <div class="contact-icon" aria-hidden="true"><i class="fa-solid fa-globe"></i></div>
+            <div class="section-kicker">URUBUGA RWACU</div>
+            <h3>UBUZIMA PHARMA</h3>
+            <p>Rondera amakuru yacu n'urutonde rw'ibicuruzwa kuri uru rubuga.</p>
+            <a class="text-link" href="https://ubuzimapharma.com" target="_blank" rel="noopener noreferrer">
+              ubuzimapharma.com <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i>
+            </a>
+          </article>
+        </div>
+
+        <div class="contact-guidance">
+          <div class="contact-guidance-copy">
+            <div class="section-kicker">KUBAZA IBICURUZWA</div>
+            <h2>Wotubwira iki?</h2>
+            <p>Ushobora kutwandikira izina ry'umuti canke igicuruzwa urondera. Tuzokubwira ko gihari n'ibindi bisobanuro twemeje.</p>
+          </div>
+          <a class="contact-message-preview" id="contactProductWhatsApp" href="#" aria-label="Baza kuri WhatsApp izina ry'umuti canke igicuruzwa urondera">
+            <i class="fa-solid fa-pills" aria-hidden="true"></i>
+            <span class="message-placeholder">Izina ry'umuti canke igicuruzwa...</span>
+            <span class="message-send" aria-hidden="true">
+              <i class="fa-solid fa-paper-plane" style="font-size: 0.85rem;"></i>
+            </span>
+          </a>
+        </div>
+
+        <aside class="contact-safety-note">
+          <i class="fa-solid fa-circle-info safety-info-icon" aria-hidden="true"></i>
+          <p><b>Ku mutekano wawe:</b> Ntutange amakuru y'ibanga yerekeye amagara yawe mu butumwa rusangi. WhatsApp si uburyo bwo kuronka ubuvuzi bwihutirwa canke gusuzumwa. Mu gihe cihutirwa, rondera ubufasha bw'ubuvuzi ubwo nyene.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-main">
+      <div class="footer-brand-column">
+        <a class="brand brand-footer" href="index.html#home"><span class="brand-mark"><span>✚</span><i></i></span><span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWANYU NI INTEGO YACU</small></span></a>
+        <p>Imiti yizewe, serivisi irangwa n'ubupfasoni no kwitwararika amagara y'abatugana.</p>
+      </div>
+      <div class="footer-link-column">
+        <h2>Injira zihuse</h2>
+        <a href="index.html#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti iboneka</a>
+      </div>
+      <div class="footer-link-column">
+        <h2>Ivyo twemera</h2>
+        <a href="values.html">Indangagaciro zacu</a><a href="contact.html">Serivisi ku bakiriya</a><a href="medicines.html">Rondera imiti</a>
+      </div>
+      <div class="footer-contact-column">
+        <h2>Twandikire</h2>
+        <p>Kinama, Gitega<br>10é avenue, numéro 57<br>Burundi</p>
+        <a href="https://ubuzimapharma.com" target="_blank" rel="noopener noreferrer">ubuzimapharma.com <span>↗</span></a>
+        <a id="footerWhatsApp" href="contact.html" target="_blank" rel="noopener noreferrer">Twandikire kuri WhatsApp <span>↗</span></a>
+      </div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> UBUZIMA PHARMA. Uburenganzira bwose burakingiwe.</span><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a></div>
+  </footer>
+  <a class="floating-whatsapp" id="floatingWhatsApp" href="#" aria-label="WhatsApp">☏</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="title desc">
+  <title id="title">Paracetamol 500 mg tablets</title>
+  <desc id="desc">A generic box of paracetamol tablets with blister packs on a pharmacy counter.</desc>
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#edf4e8"/><stop offset=".52" stop-color="#d9e4cf"/><stop offset="1" stop-color="#927a59"/></linearGradient>
+    <linearGradient id="box" x2=".1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#d8e2ea"/></linearGradient>
+    <linearGradient id="blue" x2="0" y2="1"><stop stop-color="#0b75ca"/><stop offset="1" stop-color="#03428f"/></linearGradient>
+    <linearGradient id="table" x2="0" y2="1"><stop stop-color="#c9b79b"/><stop offset="1" stop-color="#806a4d"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="170%" height="180%"><feGaussianBlur in="SourceAlpha" stdDeviation="11"/><feOffset dy="15"/><feComponentTransfer><feFuncA type="linear" slope=".3"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="960" height="500" fill="url(#bg)"/>
+  <g opacity=".4" filter="url(#blur)"><circle cx="816" cy="72" r="80" fill="#4c8b46"/><circle cx="942" cy="244" r="90" fill="#bdd28c"/><circle cx="650" cy="55" r="55" fill="#fff"/><rect x="730" y="80" width="220" height="19" rx="9" fill="#fff"/></g>
+  <path d="M0 318C190 288 335 340 505 314s306-22 455 3v183H0Z" fill="url(#table)"/>
+  <ellipse cx="704" cy="386" rx="245" ry="37" fill="#352819" opacity=".22" filter="url(#blur)"/>
+  <g filter="url(#shadow)" transform="translate(490 43) rotate(1 190 160)">
+    <path d="m28 14 322 5 33 22-1 268-353-4Z" fill="#bdcbd6"/>
+    <path d="m28 14 322 5-1 288-321-5Z" fill="url(#box)" stroke="#a9b9c8" stroke-width="3"/>
+    <path d="m350 19 33 22-1 268-34-2Z" fill="#d1dce5"/>
+    <path d="M29 205 350 208l-1 80-321-5Z" fill="url(#blue)"/>
+    <path d="M31 219 348 222" stroke="#45b5ed" stroke-width="8" opacity=".7"/>
+    <text x="51" y="96" fill="#0755a3" font-family="Arial,sans-serif" font-size="47" font-weight="700">Paracetamol</text>
+    <text x="54" y="155" fill="#0755a3" font-family="Arial,sans-serif" font-size="42" font-weight="700">500 mg</text>
+    <text x="55" y="256" fill="#fff" font-family="Arial,sans-serif" font-size="20" font-weight="700">Pain Relief · Fever Reducer</text>
+    <text x="56" y="279" fill="#d9efff" font-family="Arial,sans-serif" font-size="11" letter-spacing="2">TABLETS · 20 COUNT</text>
+  </g>
+  <g transform="translate(565 354) rotate(-14)" filter="url(#shadow)">
+    <rect width="330" height="94" rx="17" fill="#d9e2e6" stroke="#f7fbfc" stroke-width="5"/>
+    <g fill="#fff" stroke="#c5d2da" stroke-width="4">
+      <ellipse cx="38" cy="30" rx="19" ry="14"/><ellipse cx="97" cy="30" rx="19" ry="14"/><ellipse cx="156" cy="30" rx="19" ry="14"/><ellipse cx="215" cy="30" rx="19" ry="14"/><ellipse cx="274" cy="30" rx="19" ry="14"/>
+      <ellipse cx="38" cy="67" rx="19" ry="14"/><ellipse cx="97" cy="67" rx="19" ry="14"/><ellipse cx="156" cy="67" rx="19" ry="14"/><ellipse cx="215" cy="67" rx="19" ry="14"/><ellipse cx="274" cy="67" rx="19" ry="14"/>
+    </g>
+  </g>
+  <g transform="translate(520 442) rotate(12)" filter="url(#shadow)"><rect width="213" height="59" rx="13" fill="#dce5e8" stroke="#f8fbfc" stroke-width="4"/><g fill="#fff" stroke="#c6d4db" stroke-width="3"><ellipse cx="34" cy="29" rx="14" ry="11"/><ellipse cx="76" cy="29" rx="14" ry="11"/><ellipse cx="118" cy="29" rx="14" ry="11"/><ellipse cx="160" cy="29" rx="14" ry="11"/></g></g>
+</svg>

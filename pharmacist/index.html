@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064c41">
+  <title>Umufarumasiye | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../config.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body class="admin-app pharmacist-app staff-login-page" data-staff-role="pharmacist">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html" aria-label="UBUZIMA PHARMA home">
+      <span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span>
+    </a>
+    <nav class="admin-side-nav" aria-label="Ibice vy'akazi k'umufarumasiye">
+      <a class="admin-side-link active" href="index.html" aria-current="page"><span>⌂</span>Dashboard</a>
+      <a class="admin-side-link" href="index.html#pharmacistPanelInventory"><span>◇</span>Imiti n'ububiko<b class="side-count" id="pharmacistSideProductCount">0</b></a>
+      <a class="admin-side-link" href="index.html#pharmacistPanelActivity"><span>◷</span>Amateka</a>
+      <button class="admin-side-link" type="button" data-pharmacist-panel="careRequests"><span>✚</span>Ubusabe bw'abarwayi <b class="side-count" id="pharmacistCareRequestCount">0</b></button>
+      <span class="admin-nav-group-label">ITANGAZAMAKURU</span>
+      <a class="admin-side-link" href="/pharmacist/news"><span>▤</span>Amakuru</a>
+      <a class="admin-side-link" href="/pharmacist/videos"><span>▷</span>Video</a>
+      <a class="admin-side-link" href="settings.html"><span>⚙</span>Igenamiterere</a>
+    </nav>
+    <div class="admin-sidebar-bottom">
+      <a href="../index.html"><span>↩</span>Subira ku rubuga</a>
+      <button type="button" id="staffLogout"><span>⇥</span>Sohoka</button>
+    </div>
+  </aside>
+
+  <div class="admin-workspace">
+    <header class="admin-topbar">
+      <button class="admin-menu-toggle" id="pharmacistMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button>
+      <div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">umufarumasiye</span></div></div>
+      <p>Cunga imiti, ububiko n'amakuru ya farumasi.</p>
+      <a class="admin-topbar-profile" href="#pharmacistHome" aria-label="Konti y'umufarumasiye"><span>♙</span><b>Umufarumasiye</b><i>⌄</i></a>
+    </header>
+
+    <main class="admin-main" id="pharmacistHome">
+      <p class="manager-status admin-global-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
+      <section class="admin-login-view" id="staffLoginPanel">
+        <div class="admin-login-card">
+          <div class="admin-login-mark" aria-hidden="true">✚</div>
+          <span class="section-kicker">ABAKOZI BA FARUMASI</span>
+          <h1>Murakaza neza <span>ku kazi.</span></h1>
+          <p>Injira ukoresheje email n'ijambobanga wahawe kugira ucunge ububiko.</p>
+          <form id="staffLoginForm">
+            <label for="staffEmail">Email y'umukozi</label>
+            <input id="staffEmail" name="email" type="email" maxlength="254" autocomplete="username" required>
+            <label for="staffPassword">Ijambobanga</label>
+            <input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required>
+            <button class="btn btn-primary" type="submit">Injira</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="admin-dashboard" id="staffDashboard" hidden>
+        <section class="admin-hero pharmacist-hero">
+          <div class="admin-hero-copy"><span class="admin-hero-kicker">AKAZI K'UMUFARAMASIYE</span><h1>Imiti yizewe, ubuzima bwiza</h1><h2>Cunga ububiko bwa farumasi.</h2><p>Ongerako imiti, hindura igitigiri kiriho kandi usangize abakiriya amakuru.</p></div>
+          <div class="admin-hero-motto">Ubuzima bwanyu,<br>ni intego yacu!</div>
+        </section>
+        <div class="admin-summary-grid pharmacist-summary-grid" aria-label="Incama y'ububiko">
+          <button type="button" class="admin-summary-card summary-blue" data-pharmacist-panel="inventory"><span class="summary-icon">◇</span><span class="summary-number" id="pharmacistProductCount">0</span><b>Imiti mu bubiko</b><small>Ubwoko bwose</small><span class="summary-arrow">›</span></button>
+          <button type="button" class="admin-summary-card summary-green" data-pharmacist-panel="inventory"><span class="summary-icon">✓</span><span class="summary-number" id="pharmacistAvailableCount">0</span><b>Iboneka</b><small>Igaragara ku bakiriya</small><span class="summary-arrow">›</span></button>
+          <button type="button" class="admin-summary-card summary-orange" data-pharmacist-panel="inventory"><span class="summary-icon">!</span><span class="summary-number" id="pharmacistLowStockCount">0</span><b>Ububiko buke</b><small>5 canke munsi</small><span class="summary-arrow">›</span></button>
+          <a class="admin-summary-card summary-purple" href="/pharmacist/news"><span class="summary-icon">▤</span><span class="summary-number" id="pharmacistNewsCount">0</span><b>Amakuru</b><small>Yatangajwe na farumasi</small><span class="summary-arrow">›</span></a>
+        </div>
+        <div class="content-publish-shortcuts" aria-label="Ibikorwa vyo gutangaza amakuru">
+          <a class="btn btn-primary" href="/pharmacist/news?compose=1">＋ Andika amakuru mashasha</a>
+          <a class="btn btn-outline" href="/pharmacist/videos?compose=1">＋ Shiramwo video nshasha</a>
+        </div>
+
+        <div class="pharmacist-content-grid">
+          <div class="pharmacist-main-panel">
+            <section class="pharmacist-panel manager-panel" id="pharmacistPanelInventory">
+              <div class="admin-section-heading"><div><span class="section-kicker">UBUBIKO BWA FARUMASI</span><h2>Ongerako canke tunganya umuti</h2></div></div>
+              <div class="pharmacist-inventory-grid">
+                <section class="manager-panel">
+                  <form id="productForm">
+                    <input id="productId" type="hidden">
+                    <label for="productName">Izina ry'umuti</label><input id="productName" name="name" type="text" maxlength="120" required>
+                    <label for="productCategory">Iciciro</label><input id="productCategory" name="category" type="text" maxlength="80" placeholder="Nk'akarorero: Imiti y'ububabare" required>
+                    <label for="productDescription">Insiguro ngufi</label><textarea id="productDescription" name="description" rows="3" maxlength="500" required></textarea>
+                    <label for="productPrice">Igiciro muri BIF (si ngombwa)</label><input id="productPrice" name="price_bif" type="number" min="0" max="999999999999" step="1" inputmode="numeric">
+                    <label for="productStock">Igitigiri kiri mu bubiko</label><input id="productStock" name="stock_quantity" type="number" min="0" max="1000000" step="1" value="0" required>
+                    <label for="productImage">Ifoto y'umuti</label><input id="productImage" name="image" type="file" accept="image/jpeg,image/png,image/webp">
+                    <small class="form-help" id="imageHelp">JPEG, PNG canke WebP; ntirenge 5 MB. Ifoto ibikwa kuri server.</small>
+                    <img class="image-preview" id="imagePreview" alt="Ifoto y'umuti wahisemwo" hidden>
+                    <label class="availability-control"><input id="productAvailability" name="is_available" type="checkbox" checked> Umuti uraboneka ku bakiriya</label>
+                    <div class="manager-form-actions"><button class="btn btn-primary" id="saveProduct" type="submit">Bika umuti</button><button class="btn btn-outline" id="resetProductForm" type="button">Siba ivyo wanditse</button></div>
+                  </form>
+                </section>
+                <section class="manager-panel pharmacist-inventory-list"><span class="section-kicker">URUTONDE RW'IMPAKU</span><h2>Imiti yashizwemwo</h2><div class="managed-products" id="managedProducts"></div></section>
+              </div>
+            </section>
+            <section class="pharmacist-panel manager-panel" id="pharmacistPanelActivity">
+              <div class="admin-section-heading"><div><span class="section-kicker">GUKURIKIRANA</span><h2>Amateka y'ihindurwa</h2></div></div>
+              <div class="audit-log-list" id="auditLogList"></div>
+            </section>
+            <section class="pharmacist-panel manager-panel staff-care-panel" id="pharmacistPanelCareRequests" hidden>
+              <div class="admin-section-heading"><div><span class="section-kicker">UBUFASHA BWO KWA MUGANGA</span><h2>Ubusabe bw'abarwayi</h2></div><button class="btn btn-outline" type="button" data-refresh-staff-care>Subiramwo</button></div>
+              <p class="patient-help">Raba aho n'igihe umurwayi yakirijwe, umusabe ubutumwa, kandi ukurikirane ivyifuzo vyo kuvugana n'umuganga.</p>
+              <div class="staff-care-request-list" id="pharmacistCareRequests" aria-live="polite"></div>
+            </section>
+          </div>
+          <aside class="pharmacist-aside">
+            <section class="admin-quick-panel"><h2><span>▦</span>IBIKORWA VYAWE</h2><a href="index.html#pharmacistPanelInventory"><i class="quick-icon quick-blue">◇</i><span>Imiti n'ububiko</span><strong>›</strong></a><a href="/pharmacist/news"><i class="quick-icon quick-green">▤</i><span>Amakuru</span><strong>›</strong></a><a href="/pharmacist/videos"><i class="quick-icon quick-orange">▷</i><span>Video</span><strong>›</strong></a><a href="index.html#pharmacistPanelActivity"><i class="quick-icon quick-blue">◷</i><span>Amateka y'ihindurwa</span><strong>›</strong></a></section>
+            <section class="admin-safety-panel"><h2><span>⬟</span>Umwete mu bubiko</h2><ul><li>Raba ibitigiri vy'imiti kenshi</li><li>Hisha imiti itagishobora kugurishwa</li><li>Genzura ko igiciro n'ifoto ari vyo</li></ul></section>
+            <a class="admin-promo-card" href="../contact.html"><img src="../assets/pharmacy-consultation.png" alt=""><span>Gufasha abakiriya, ni igikorwa cacu.<b>✚</b></span></a>
+          </aside>
+        </div>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Igikoresho c'umufarumasiye</span><a href="../contact.html">Twandikire</a></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

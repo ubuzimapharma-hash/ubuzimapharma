@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Amakuru arambuye ku muti uri kuri UBUZIMA PHARMA.">
+  <meta name="theme-color" content="#0b3678">
+  <title>Amakuru y'umuti | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="topbar"><div class="container topbar-inner"><span>UBUZIMA PHARMA · KINAMA, GITEGA</span><span>Amakuru y'imiti n'ibindi bicuruzwa</span></div></div>
+  <header class="header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html#home" aria-label="UBUZIMA PHARMA home">
+        <span class="brand-mark"><span>✚</span><i></i></span>
+        <span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav id="mainNav">
+        <a href="index.html#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti</a><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a>
+        <a class="nav-cta" href="/patient/">Injira nk'umurwayi <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="product-detail-page">
+    <div class="container">
+      <a class="product-detail-back" href="medicines.html">← Subira ku rutonde rw'imiti</a>
+      <p class="product-detail-status" id="productDetailStatus" role="status" aria-live="polite" hidden></p>
+      <div id="productDetailContent"></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-main">
+      <div class="footer-brand-column">
+        <a class="brand brand-footer" href="index.html#home"><span class="brand-mark"><span>✚</span><i></i></span><span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWANYU NI INTEGO YACU</small></span></a>
+        <p>Imiti yizewe, serivisi irangwa n'ubupfasoni no kwitwararika amagara y'abatugana.</p>
+      </div>
+      <div class="footer-link-column">
+        <h2>Inzira zihuse</h2>
+        <a href="index.html#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti iboneka</a>
+      </div>
+      <div class="footer-link-column">
+        <h2>Ivyo twemera</h2>
+        <a href="values.html">Indangagaciro zacu</a><a href="contact.html">Serivisi ku bakiriya</a><a href="medicines.html">Rondera imiti</a>
+      </div>
+      <div class="footer-contact-column">
+        <h2>Twandikire</h2>
+        <p>Kinama, Gitega<br>10é avenue, numéro 57<br>Burundi</p>
+        <a href="https://ubuzimapharma.com" target="_blank" rel="noopener noreferrer">ubuzimapharma.com <span>↗</span></a>
+        <a id="footerWhatsApp" href="contact.html" target="_blank" rel="noopener noreferrer">Twandikire kuri WhatsApp <span>↗</span></a>
+      </div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> UBUZIMA PHARMA. Uburenganzira bwose burakingiwe.</span><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a></div>
+  </footer>
+  <a class="floating-whatsapp" id="floatingWhatsApp" href="#" aria-label="WhatsApp">☏</a>
+</body>
+</html>

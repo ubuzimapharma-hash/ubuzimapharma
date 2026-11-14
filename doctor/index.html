@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064c41">
+  <title>Ubufasha bw'abaganga | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../config.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body class="admin-app doctor-app staff-login-page" data-staff-role="doctor">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html" aria-label="UBUZIMA PHARMA home"><span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>URUBUGA RW'ABAGANGA</small></span></a>
+    <nav class="admin-side-nav" aria-label="Ibikorwa vy'umuganga"><a class="admin-side-link active" href="#doctorDashboard" aria-current="page"><span>◷</span>Ibikorwa vyanje</a></nav>
+    <div class="admin-sidebar-bottom"><a href="../index.html"><span>↩</span>Subira ku rubuga</a><button type="button" id="staffLogout"><span>⇥</span>Sohoka</button></div>
+  </aside>
+  <div class="admin-workspace">
+    <header class="admin-topbar"><button class="admin-menu-toggle" id="doctorMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">umuganga</span></div></div><p>Gukurikirana abarwayi bahawe umuganga.</p><span class="admin-topbar-profile"><span>♙</span><b>Umuganga</b></span></header>
+    <main class="admin-main">
+      <p class="manager-status admin-global-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
+      <section class="admin-login-view" id="staffLoginPanel"><div class="admin-login-card"><div class="admin-login-mark" aria-hidden="true">✚</div><span class="section-kicker">UBUFASHA BW'ABAGANGA</span><h1>Murakaza neza <span>ku kazi.</span></h1><p>Injira ukoresheje ubutumire bwemejwe kugira ubone abarwayi wahawe.</p><form id="staffLoginForm"><label for="staffEmail">Email y'umuganga</label><input id="staffEmail" name="email" type="email" maxlength="254" autocomplete="username" required><label for="staffPassword">Ijambobanga</label><input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Injira</button></form></div></section>
+      <section class="admin-dashboard doctor-dashboard" id="staffDashboard" hidden>
+        <section class="admin-hero doctor-hero"><div class="admin-hero-copy"><span class="admin-hero-kicker">URUTONDE RW'ABARWAYI WASHINZWE</span><h1>Gukurikirana abarwayi</h1><h2>Genzura gahunda n'ubutumwa bwawe.</h2><p>Abantu ubona ni abarwayi bagenywe kuri konti yawe.</p></div><div class="admin-hero-motto">Kwitwararika<br>umurwayi wese!</div></section>
+        <section class="manager-panel doctor-consultations-panel"><div class="admin-section-heading"><div><span class="section-kicker">IBIGANIRO N'IGIHE CYO KUBONANA</span><h2>Abakugenewe</h2></div><button class="btn btn-outline" type="button" id="refreshDoctorConsultations">Subiramwo</button></div><div class="doctor-consultation-list" id="doctorConsultations" aria-live="polite"><p class="empty-state">Turiko turarondera abarwayi...</p></div></section>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Urubuga rw'abaganga</span><a href="../contact.html">Twandikire</a></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

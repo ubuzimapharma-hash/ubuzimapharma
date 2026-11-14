@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b3678">
+  <title>Tunganya imiti | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body data-staff-role="pharmacist">
+  <div class="topbar"><div class="container topbar-inner"><span>UBUZIMA PHARMA · KINAMA, GITEGA</span><span>Ubuzima bwanyu ni intego yacu.</span></div></div>
+  <header class="header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html#home" aria-label="UBUZIMA PHARMA home">
+        <span class="brand-mark"><span>✚</span><i></i></span>
+        <span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav id="mainNav">
+        <a href="index.html#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti</a><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a>
+        <a class="nav-cta" href="/patient/">Injira nk'umurwayi <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="manager-section">
+    <div class="container">
+      <div class="section-kicker">ABAKOZI BA FARUMASI</div>
+      <h1>Tunganya <span>imiti n'ububiko.</span></h1>
+      <p class="manager-intro">Injira nk'umufarumasiye kugira wongere, uhindure canke ucunge igitigiri c'imiti iri mu bubiko.</p>
+      <p class="manager-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
+
+      <section class="manager-panel" id="staffLoginPanel">
+        <h2>Kwinjira kw'abakozi</h2>
+        <form id="staffLoginForm">
+          <label for="staffEmail">Email y'umukozi</label>
+          <input id="staffEmail" name="email" type="email" maxlength="254" autocomplete="username" required>
+          <label for="staffPassword">Ijambobanga</label>
+          <input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required>
+          <button class="btn btn-primary" type="submit">Injira</button>
+        </form>
+      </section>
+
+      <section id="staffDashboard" hidden>
+        <div class="manager-dashboard-heading">
+          <p>Winjiye nka <b id="staffIdentity"></b></p>
+          <button class="btn btn-outline" id="staffLogout" type="button">Sohoka</button>
+        </div>
+        <div class="manager-grid">
+        <section class="manager-panel">
+          <form id="productForm">
+            <input id="productId" type="hidden">
+            <label for="productName">Izina ry'umuti</label>
+            <input id="productName" name="name" type="text" maxlength="120" required>
+            <label for="productCategory">Icivugo</label>
+            <input id="productCategory" name="category" type="text" maxlength="80" placeholder="Nk'akarorero: Imiti y'ububabare" required>
+            <label for="productDescription">Insiguro ngufi</label>
+            <textarea id="productDescription" name="description" rows="3" maxlength="500" required></textarea>
+            <label for="productPrice">Igiciro muri BIF</label>
+            <input id="productPrice" name="price_bif" type="number" min="0" max="999999999999" step="1" inputmode="numeric">
+            <label for="productStock">Igitigiri kiri mu bubiko</label>
+            <input id="productStock" name="stock_quantity" type="number" min="0" max="1000000" step="1" value="0" required>
+            <label for="productImage">Ifoto y'umuti</label>
+            <input id="productImage" name="image" type="file" accept="image/jpeg,image/png,image/webp">
+            <small class="form-help" id="imageHelp">JPEG, PNG canke WebP; ntirenge 5 MB. Ifoto ibikwa kuri server.</small>
+            <img class="image-preview" id="imagePreview" alt="Ifoto y'umuti wahisemwo" hidden>
+            <label class="availability-control"><input id="productAvailability" name="is_available" type="checkbox" checked> Umuti uraboneka ku bakiriya</label>
+            <details class="product-extra-fields" id="productExtraFields">
+              <summary>Ayandi makuru akenewe kuri uyu muti</summary>
+              <div class="product-extra-fields-grid">
+                <div>
+                  <label for="productGenericName">Izina rusangi</label>
+                  <input id="productGenericName" name="generic_name" type="text" maxlength="120">
+                  <label for="productActiveIngredient">Ibigize umuti</label>
+                  <input id="productActiveIngredient" name="active_ingredient" type="text" maxlength="300">
+                  <label for="productStrength">Ubukomezi / ingero</label>
+                  <input id="productStrength" name="strength" type="text" maxlength="80" placeholder="Nk'akarorero: 500 mg">
+                  <label for="productDosageForm">Uko umuti uteye</label>
+                  <input id="productDosageForm" name="dosage_form" type="text" maxlength="80" placeholder="Nk'akarorero: ibinini">
+                </div>
+                <div>
+                  <label for="productPackSize">Ubwoko bw'ipaki</label>
+                  <input id="productPackSize" name="pack_size" type="text" maxlength="120">
+                  <label for="productManufacturer">Aho wakorewe</label>
+                  <input id="productManufacturer" name="manufacturer" type="text" maxlength="120">
+                  <label for="productDirections">Uko ukoreshwa</label>
+                  <textarea id="productDirections" name="directions_for_use" rows="3" maxlength="2000"></textarea>
+                  <label for="productWarnings">Ivyitonderwa</label>
+                  <textarea id="productWarnings" name="warnings" rows="3" maxlength="2000"></textarea>
+                  <label for="productStorage">Uko ubikwa</label>
+                  <textarea id="productStorage" name="storage_instructions" rows="2" maxlength="500"></textarea>
+                </div>
+              </div>
+              <small class="form-help">Andika amakuru ari ku gapaki canke yemejwe n'umukozi abifitiye ububasha.</small>
+            </details>
+            <div class="manager-form-actions">
+              <button class="btn btn-primary" id="saveProduct" type="submit">Bika umuti</button>
+              <button class="btn btn-outline" id="resetProductForm" type="button">Futa ivyo wanditse</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="manager-panel">
+          <h2>Imiti yashizwemwo</h2>
+          <div class="managed-products" id="managedProducts"></div>
+        </section>
+        </div>
+        <section class="manager-panel audit-panel">
+          <h2>Amateka y'ivyakozwe</h2>
+          <div class="audit-log-list" id="auditLogList"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-main">
+      <div class="footer-brand-column">
+        <a class="brand brand-footer" href="index.html#home"><span class="brand-mark"><span>✚</span><i></i></span><span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWANYU NI INTEGO YACU</small></span></a>
+        <p>Imiti yizewe, seruvise irangwa n'ubupfasoni no kwitwararika amagara y'abatugana.</p>
+      </div>
+      <div class="footer-link-column">
+        <h2>Inzira zihuse</h2>
+        <a href="index.html#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti iboneka</a>
+      </div>
+      <div class="footer-link-column">
+        <h2>Ivyo twemera</h2>
+        <a href="values.html">Indangagaciro zacu</a><a href="contact.html">Seruvise ku bakiriya</a><a href="medicines.html">Rondera imiti</a>
+      </div>
+      <div class="footer-contact-column">
+        <h2>Twandikire</h2>
+        <p>Kinama, Gitega<br>10é avenue, numéro 57<br>Burundi</p>
+        <a href="https://ubuzimapharma.com" target="_blank" rel="noopener noreferrer">ubuzimapharma.com <span>↗</span></a>
+        <a id="footerWhatsApp" href="contact.html" target="_blank" rel="noopener noreferrer">Twandikire kuri WhatsApp <span>↗</span></a>
+      </div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> UBUZIMA PHARMA. Uburenganzira bwose burakingiwe.</span><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a></div>
+  </footer>
+  <a class="floating-whatsapp" id="floatingWhatsApp" href="#" aria-label="WhatsApp">☏</a>
+</body>
+</html>

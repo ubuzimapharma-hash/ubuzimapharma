@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#064c41">
+  <title>Igenamiterere | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css"><script defer src="../config.js"></script><script defer src="../app.js"></script>
+</head>
+<body class="admin-app pharmacist-app content-manager-app staff-login-page" data-staff-role="pharmacist">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html"><span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span></a>
+    <nav class="admin-side-nav" aria-label="Ibice vy'akazi k'umufarumasiye"><a class="admin-side-link" href="/pharmacist/"><span>⌂</span>Dashboard</a><a class="admin-side-link" href="/pharmacist/#pharmacistPanelInventory"><span>◇</span>Imiti n'ububiko</a><a class="admin-side-link" href="/pharmacist/#pharmacistPanelActivity"><span>◷</span>Amateka</a><span class="admin-nav-group-label">ITANGAZAMAKURU</span><a class="admin-side-link" href="/pharmacist/news"><span>▤</span>Amakuru</a><a class="admin-side-link" href="/pharmacist/videos"><span>▷</span>Video</a><a class="admin-side-link active" href="/pharmacist/settings" aria-current="page"><span>⚙</span>Igenamiterere</a></nav>
+    <div class="admin-sidebar-bottom"><a href="../index.html"><span>↩</span>Subira ku rubuga</a><button type="button" id="staffLogout"><span>⇥</span>Sohoka</button></div>
+  </aside>
+  <div class="admin-workspace">
+    <header class="admin-topbar"><button class="admin-menu-toggle" id="pharmacistMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">umufarumasiye</span></div></div><p>Igenamiterere ry'itangazamakuru.</p><span class="admin-topbar-profile"><span>♙</span><b>Umufarumasiye</b></span></header>
+    <main class="admin-main content-manager-main"><p class="manager-status admin-global-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
+      <section class="admin-login-view" id="staffLoginPanel"><div class="admin-login-card"><div class="admin-login-mark" aria-hidden="true">✚</div><span class="section-kicker">ABAKOZI BA FARUMASI</span><h1>Murakaza neza <span>ku kazi.</span></h1><p>Injira kugira uhindure igenamiterere ry'itangazamakuru.</p><form id="staffLoginForm"><label for="staffEmail">Email y'umukozi</label><input id="staffEmail" name="email" type="email" maxlength="254" autocomplete="username" required><label for="staffPassword">Ijambobanga</label><input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Injira</button></form></div></section>
+      <section class="admin-dashboard content-manager-dashboard" id="staffDashboard" hidden>
+        <header class="content-page-heading"><div><span class="section-kicker">ITANGAZAMAKURU</span><h1>Igenamiterere</h1><p>Hitamwo uko igikoresho cawe kibika kandi kigatunganya amakuru.</p></div></header>
+        <section class="manager-panel content-settings-panel"><h2>News editor preferences</h2><p>These preferences are saved in this browser.</p><form id="contentSettingsForm"><label class="settings-checkbox" for="contentAutosave"><input id="contentAutosave" type="checkbox"> Autosave articles while editing</label><label for="contentDefaultCategory">Default news category</label><select id="contentDefaultCategory"><option>Ubuzima</option><option>Ubuzima rusange</option><option>Imiti</option><option>Ubushakashatsi</option></select><label for="contentDefaultWidth">Editor page width</label><select id="contentDefaultWidth"><option value="wide">Wide</option><option value="normal">Normal</option><option value="narrow">Narrow</option></select><label for="contentDefaultMargins">Editor page margins</label><select id="contentDefaultMargins"><option value="compact">Compact</option><option value="normal">Normal</option><option value="spacious">Spacious</option></select><p class="form-help">Autosave preference applies when you next open the News page. Your saved articles remain on the server.</p><button class="btn btn-primary" type="submit">Save settings</button></form></section>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Content settings</span></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

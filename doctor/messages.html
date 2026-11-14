@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064c41">
+  <title>Ubutumwa bw'ibanga | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../config.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body class="admin-app doctor-app staff-login-page" data-staff-role="doctor">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html" aria-label="UBUZIMA PHARMA home"><span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>URUBUGA RW'ABAGANGA</small></span></a>
+    <nav class="admin-side-nav" aria-label="Ibikorwa vy'umuganga"><a class="admin-side-link" href="./"><span>◷</span>Ibikorwa vyanje</a><a class="admin-side-link active" href="messages.html" aria-current="page"><span>✉</span>Ubutumwa</a></nav>
+    <div class="admin-sidebar-bottom"><a href="../index.html"><span>↩</span>Subira ku rubuga</a><button type="button" id="staffLogout"><span>⇥</span>Sohoka</button></div>
+  </aside>
+  <div class="admin-workspace">
+    <header class="admin-topbar"><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">umuganga</span></div></div><p>Ubutumwa bw'ibanga n'abarwayi washizweko.</p><span class="admin-topbar-profile"><span>♙</span><b>Umuganga</b></span></header>
+    <main class="admin-main">
+      <p class="manager-status admin-global-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
+      <section class="admin-login-view" id="staffLoginPanel"><div class="admin-login-card"><div class="admin-login-mark" aria-hidden="true">✚</div><span class="section-kicker">UBUTUMWA BW'IBANGA</span><h1>Injira <span>ku rubuga.</span></h1><p>Koresha konti y'umuganga yemejwe kugira ushobore kuvugana n'abarwayi washizweko.</p><form id="staffLoginForm"><label for="staffEmail">Email y'umuganga</label><input id="staffEmail" name="email" type="email" maxlength="254" autocomplete="username" required><label for="staffPassword">Ijambobanga</label><input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Injira</button></form></div></section>
+      <section class="admin-dashboard doctor-dashboard" id="staffDashboard" hidden>
+        <div class="doctor-message-back"><a class="btn btn-outline" href="./">← Subira ku rutonde rw'abarwayi</a></div>
+        <section class="manager-panel doctor-messages-panel"><div class="admin-section-heading"><div><span class="section-kicker">IKIGANIRO C'IBANGA</span><h1>Ubutumwa n'umurwayi</h1><p id="doctorMessagePatient">Turiko turamenya umurwayi...</p></div><div class="doctor-message-toolbar"><button class="btn btn-outline" id="doctorMessageChoose" type="button" hidden>Hitamwo uwundi murwayi</button><button class="btn btn-outline" id="refreshDoctorMessages" type="button">Subiramwo</button></div></div><div class="doctor-message-thread" id="doctorMessageThread" aria-live="polite"><p class="care-message-empty">Turiko turarondera ubutumwa...</p></div><p class="doctor-message-closed" id="doctorMessageClosedNote" hidden>Iki kiganiro carangiye; ntushobora kurungika ubundi butumwa.</p><form class="care-message-form doctor-message-reply" id="doctorMessageReply"><textarea name="message" rows="3" maxlength="4000" required placeholder="Andika ubutumwa bw'ibanga ku murwayi..."></textarea><button class="btn btn-primary" type="submit">Rungika ubutumwa</button></form></section>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Ubutumwa bw'abaganga</span><a href="../contact.html">Twandikire</a></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

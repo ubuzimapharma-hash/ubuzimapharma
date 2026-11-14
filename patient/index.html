@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064c41">
+  <title>Konti y'umurwayi | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../config.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body class="admin-app patient-app patient-login-page">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html" aria-label="UBUZIMA PHARMA home">
+      <span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span>
+    </a>
+    <nav class="admin-side-nav" aria-label="Ibice vya konti y'umurwayi">
+      <button type="button" class="admin-side-link active" data-patient-panel="shop"><span>⌂</span>Dashboard</button>
+      <button type="button" class="admin-side-link" data-patient-panel="shop"><span>◇</span>Rondera imiti <b class="side-count" id="patientSideProductCount">0</b></button>
+      <button type="button" class="admin-side-link" data-patient-panel="orders"><span>▤</span>Amabwirizwa yanje <b class="side-count" id="patientSideOrderCount">0</b></button>
+      <button type="button" class="admin-side-link" data-patient-panel="careRequests"><span>✚</span>Ubufasha bwo kwa muganga</button>
+      <button type="button" class="admin-side-link" data-patient-panel="account"><span>♙</span>Konti yanje</button>
+    </nav>
+    <div class="admin-sidebar-bottom">
+      <a href="../index.html"><span>↩</span>Subira ku rubuga</a>
+      <button type="button" id="patientLogout"><span>⇥</span>Sohoka</button>
+    </div>
+  </aside>
+
+  <div class="admin-workspace">
+    <header class="admin-topbar">
+      <button class="admin-menu-toggle" id="patientMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button>
+      <div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="patientTopbarIdentity">konti y'umurwayi</span></div></div>
+      <p>Raba imiti iri mu bubiko kandi ukurikirane amabwirizwa yawe.</p>
+      <button class="admin-topbar-profile patient-profile-button" type="button" data-patient-panel="account" aria-label="Konti yanje"><span id="patientTopbarAvatar">♙</span><b>Konti yanje</b><i>⌄</i></button>
+    </header>
+
+    <main class="admin-main" id="patientHome">
+      <p class="manager-status admin-global-status" id="patientStatus" role="status" aria-live="polite" hidden></p>
+      <section class="patient-login-view" id="patientAuth">
+        <div class="admin-login-card">
+          <div class="admin-login-mark" aria-hidden="true">✚</div>
+          <span class="section-kicker">KONTI Y'UMURWAYI</span>
+          <h1>Murakaza neza <span>kuri konti yanyu.</span></h1>
+          <p>Injira canke wugurure konti kugira utumize imiti no gukurikirana amabwirizwa yawe.</p>
+          <div class="patient-auth-tabs"><button type="button" class="patient-tab active" id="showPatientLogin">Kwinjira</button><button type="button" class="patient-tab" id="showPatientRegister">Kwugurura konti</button></div>
+          <form id="patientLoginForm">
+            <label for="patientLoginEmail">Email</label><input id="patientLoginEmail" name="email" type="email" maxlength="254" autocomplete="email" required>
+            <label for="patientLoginPassword">Ijambo banga</label><input id="patientLoginPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required>
+            <button class="btn btn-primary" type="submit">Injira</button>
+          </form>
+          <form id="patientRegisterForm" hidden>
+            <label for="patientFullName">Amazina yose</label><input id="patientFullName" name="full_name" type="text" maxlength="120" autocomplete="name" required>
+            <label for="patientPhone">Inomero ya telefone</label><input id="patientPhone" name="phone" type="tel" maxlength="30" autocomplete="tel" required>
+            <label for="patientRegisterEmail">Email</label><input id="patientRegisterEmail" name="email" type="email" maxlength="254" autocomplete="email" required>
+            <label for="patientRegisterPassword">Ijambo banga (inyuguti 12 canke zirenga)</label><input id="patientRegisterPassword" name="password" type="password" minlength="12" maxlength="72" autocomplete="new-password" required>
+            <button class="btn btn-primary" type="submit">Ugurura konti yanje</button>
+          </form>
+          <p class="patient-privacy-note">Konti ikoresha email, amazina na telefone kugira tubone amabwirizwa yawe. Ntitubaza amakuru y'amagara canke y'indwara.</p>
+        </div>
+      </section>
+
+      <section class="admin-dashboard patient-dashboard" id="patientDashboard" hidden>
+        <section class="admin-hero patient-hero">
+          <div class="admin-hero-copy"><span class="admin-hero-kicker">KONTI Y'UMURWAYI</span><h1>Ubuzima bwiza butangurira hano</h1><h2>Imiti yizewe kuri wewe n'umuryango wawe.</h2><p>Hitamwo imiti iriho, rungika ibwirizwa kandi ukurikirane uko rihagaze.</p></div>
+          <div class="admin-hero-motto">Ubuzima bwanyu,<br>ni intego yacu!</div>
+        </section>
+        <div class="admin-summary-grid patient-summary-grid">
+          <button type="button" class="admin-summary-card summary-blue" data-patient-panel="shop"><span class="summary-icon">◇</span><span class="summary-number" id="patientProductCount">0</span><b>Imiti iboneka</b><small>Mu bubiko ubu</small><span class="summary-arrow">›</span></button>
+          <button type="button" class="admin-summary-card summary-green" data-patient-panel="orders"><span class="summary-icon">▤</span><span class="summary-number" id="patientOrderCount">0</span><b>Amabwirizwa yanje</b><small id="patientPendingCount">0 arindiriye</small><span class="summary-arrow">›</span></button>
+          <button type="button" class="admin-summary-card summary-orange" data-patient-panel="careRequests"><span class="summary-icon">✚</span><span class="summary-number" id="patientCareRequestCount">0</span><b>Ubufasha nasavye</b><small>Kurikira ubutumwa bwa farumasi</small><span class="summary-arrow">›</span></button>
+          <button type="button" class="admin-summary-card summary-purple" data-patient-panel="account"><span class="summary-icon">♙</span><span class="summary-number patient-profile-initial">U</span><b>Konti yanje</b><small>Amakuru yawe y'ibanze</small><span class="summary-arrow">›</span></button>
+        </div>
+        <div class="patient-content-grid">
+          <div class="patient-main-panel">
+            <section class="patient-content-panel manager-panel" id="patientPanelShop">
+              <div class="admin-section-heading"><div><span class="section-kicker">URUTONDE RW'IMPAKU</span><h2>Rondera imiti</h2></div></div>
+              <p class="patient-help">Hitamwo igitigiri ushaka. Ibicuruzwa bizotumizwa bifata umwanya mu bubiko; ibwirizwa ririndiriye kwemezwa na farumasi.</p>
+              <form id="patientOrderForm"><div class="patient-products" id="patientProducts"></div><button class="btn btn-primary" type="submit">Rungika ibwirizwa</button></form>
+            </section>
+            <section class="patient-content-panel manager-panel" id="patientPanelOrders" hidden>
+              <div class="admin-section-heading"><div><span class="section-kicker">AMATEKA Y'IBWIRIZWA</span><h2>Amabwirizwa yanje</h2></div></div>
+              <div class="admin-list" id="patientOrders"></div>
+            </section>
+            <section class="patient-content-panel manager-panel patient-care-panel" id="patientPanelCareRequests" hidden>
+              <div class="admin-section-heading"><div><span class="section-kicker">UBUFASHA BWO KWA MUGANGA</span><h2>Saba ubufasha bwa farumasi</h2></div></div>
+              <p class="patient-help">Tubwire aho n'igihe wakiriwe. Ushobora kwongerako urupapuro rw'umuti no gusaba ko umukozi aguhuza n'umuganga kugira akurikirane nawe.</p>
+              <form id="patientCareRequestForm" class="patient-care-form">
+                <label for="careTreatmentLocation">Aho wakirijwe</label><input id="careTreatmentLocation" name="treatment_location" type="text" maxlength="180" required placeholder="Nk'akarorero: Ibitaro vya Gitega">
+                <label for="careTreatedOn">Itariki wakirijweko</label><input id="careTreatedOn" name="treated_on" type="date" required>
+                <label for="carePrescription">Urupapuro rw'umuti</label><input id="carePrescription" name="prescription" type="file" accept="application/pdf,image/jpeg,image/png,image/webp"><small class="form-help">Ushobora kwongerako PDF, JPEG, PNG canke WebP; ntirenge 5 MB.</small>
+                <label class="care-doctor-choice"><input id="careRequestDoctor" name="request_doctor" type="checkbox"><span>Ndashaka ko umukozi ansaba ko umuganga ankurikirana</span></label>
+                <p class="patient-privacy-note">Iki gisabwa kimenyesha abakozi gusa. Ntigihita gitegura igihe co kubonana n'umuganga.</p>
+                <button class="btn btn-primary" id="submitPatientCareRequest" type="submit">Rungika igisabwa</button>
+              </form>
+              <div class="admin-section-heading patient-care-list-heading"><div><span class="section-kicker">IBISABWA VYANJE</span><h2>Uko igisabwa gihagaze</h2></div><button class="btn btn-outline" id="refreshPatientCareRequests" type="button">Subiramwo</button></div>
+              <div class="patient-care-request-list" id="patientCareRequests" aria-live="polite"></div>
+            </section>
+            <section class="patient-content-panel manager-panel" id="patientPanelAccount" hidden>
+              <div class="admin-section-heading"><div><span class="section-kicker">AMAKURU YANJE</span><h2>Konti yanje</h2></div></div>
+              <div class="patient-account-details"><span class="patient-account-avatar" id="patientProfileAvatar">♙</span><div><b id="patientIdentity"></b><span id="patientAccountEmail"></span><span id="patientAccountPhone"></span></div></div>
+              <form class="profile-edit-form" id="patientProfileForm">
+                <div class="profile-form-heading"><h3>Hindura amakuru yawe</h3><p>Hindura amazina, inomero ya telefone canke ifoto ya konti.</p></div>
+                <label for="patientProfileName">Amazina yuzuye</label><input id="patientProfileName" name="full_name" type="text" maxlength="120" autocomplete="name" required>
+                <label for="patientProfilePhone">Inomero ya telefone</label><input id="patientProfilePhone" name="phone" type="tel" maxlength="30" autocomplete="tel">
+                <label for="patientProfileImage">Ifoto ya konti</label><input id="patientProfileImage" name="image" type="file" accept="image/jpeg,image/png,image/webp">
+                <label class="profile-remove-photo"><input id="patientRemoveProfileImage" name="remove_profile_image" type="checkbox" value="true"><span>Kuraho ifoto iri kuri konti</span></label>
+                <p class="patient-privacy-note profile-photo-note">Hitamwo ifoto ya JPEG, PNG canke WebP. Ifoto izohindurwa WebP imbere yo kubikwa.</p>
+                <button class="btn btn-primary" id="savePatientProfile" type="submit">Bika amahinduka</button><p class="profile-form-status" id="patientProfileStatus" role="status" aria-live="polite"></p>
+              </form>
+              <p class="patient-privacy-note">Umutekano w'amakuru yawe ni ngirakamaro. Konti ntibika amakuru y'indwara canke y'ubuvuzi.</p>
+            </section>
+          </div>
+          <aside class="patient-aside">
+            <section class="admin-quick-panel"><h2><span>▦</span>IBIKORWA VYAWE</h2><button type="button" data-patient-panel="shop"><i class="quick-icon quick-blue">◇</i><span>Rondera imiti</span><strong>›</strong></button><button type="button" data-patient-panel="orders"><i class="quick-icon quick-green">▤</i><span>Amabwirizwa yanje</span><b id="patientQuickOrderCount">0</b><strong>›</strong></button><button type="button" data-patient-panel="careRequests"><i class="quick-icon quick-orange">✚</i><span>Ubufasha nasavye</span><b id="patientQuickCareCount">0</b><strong>›</strong></button><button type="button" data-patient-panel="account"><i class="quick-icon quick-blue">♙</i><span>Konti yanje</span><strong>›</strong></button></section>
+            <section class="admin-safety-panel"><h2><span>⬟</span>Umutekano wawe</h2><ul><li>Amakuru yawe arakingiwe</li><li>Ushobora guhagarika ibwirizwa ritararemezwa</li><li>Nta makuru y'indwara tubika</li></ul></section>
+            <a class="admin-promo-card" href="../contact.html"><img src="../assets/pharmacy-consultation.png" alt=""><span>Ufise ikibazo? Twandikire.<b>✚</b></span></a>
+          </aside>
+        </div>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Konti y'umurwayi</span><a href="../contact.html">Twandikire</a></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UBUZIMA PHARMA — Imiti yizewe, seruvise zirangwa n'ubupfasoni n'ukwitwararika abarwayi. Kinama, Gitega, Burundi.">
+  <meta name="theme-color" content="#0b3678">
+  <title>UBUZIMA PHARMA | Ubuzima bwanyu ni intego yacu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="topbar"><div class="container topbar-inner"><span>UBUZIMA PHARMA · KINAMA, GITEGA</span><span>Ubuzima bwanyu ni intego yacu.</span></div></div>
+  <header class="header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="UBUZIMA PHARMA home">
+        <span class="brand-mark"><span>✚</span><i></i></span>
+        <span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav id="mainNav">
+        <a href="#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti</a><a href="news.html">Amakuru</a><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a>
+        <a class="nav-cta" href="/patient/">Injira nk'umurwayi <span>↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> IKIGO CANYU C'IMITI CIZEWE</div>
+          <h1>Ubuzima bwiza<br><em>burangwa</em> <strong>n'amagara meza.</strong></h1>
+          <p class="hero-lead">Imiti yizewe, kwakirwa neza n'ubufasha mu kumenya umuti ukeneye. UBUZIMA PHARMA iri hafi yawe.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="medicines.html">Rondera imiti <span>→</span></a><a class="btn btn-outline" href="contact.html">Tumenye aho turi</a></div>
+          <div class="hero-note"><span class="note-check">✓</span><span>Turakwumviriza. Turakwubaha. Turitwararika amagara yawe.</span></div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-promise">
+            <span class="promise-symbol">✚</span>
+            <p><b>Ivuze hakiri kare urinde ubuzima bwawe gusinzikara.</b><small>Turahari kugira ngo tugufashe kurondera imiti ukeneye.</small></p>
+          </div>
+          <img class="hero-image" src="assets/pharmacy-consultation.png" alt="Umufarumasiye afasha umukiriya muri farumasi">
+          <a class="hero-about-link" href="about.html">Menya vyinshi <span>→</span></a>
+        </div>
+      </div>
+      <div class="hero-wave"></div>
+    </section>
+
+    <section class="section catalogue-section" id="catalogue">
+      <div class="container">
+        <div class="section-heading"><div><div class="section-kicker">IBIRANGURWA</div><h2>Rondera imiti <span>ukeneye.</span></h2><p>Raba amwe mu mafoto n'amakuru y'imiti. Ja ku rutonde rwose kugira ubone imiti yose iriko iraboneka.</p></div><div class="catalogue-badge">UBUZIMA<br><b>PHARMA</b></div></div>
+        <button class="cart-toggle" id="openCart" type="button" aria-haspopup="dialog">Igitebo <span id="cartCount">0</span></button>
+        <p class="catalogue-status" id="catalogueStatus" role="status" aria-live="polite" hidden></p>
+        <div class="product-grid" id="productGrid" data-catalogue-mode="preview" aria-live="polite"></div>
+        <a class="catalogue-all-link" href="medicines.html">Raba imiti yose <span>→</span></a>
+        <p class="catalogue-disclaimer">Ivyerekanwa kuri uru rubuga si urutonde rw'imiti yose dufise. Kuboneka kw'umuti n'igiciro vyemezwa n'ikigo cacu igihe muduhamagaye. Imiti itangwa hakurikijwe amategeko n'impanuro z'ababifitiye ububasha.</p>
+      </div>
+    </section>
+
+    <dialog class="cart-dialog" id="cartDialog" aria-labelledby="cartTitle">
+      <div class="cart-dialog-header"><h2 id="cartTitle">Igitebo canyu</h2><button class="icon-button" id="closeCart" type="button" aria-label="Funga igitebo">×</button></div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-dialog-footer"><p id="cartTotal"></p><button class="btn btn-primary" id="cartWhatsApp" type="button">Tumiza kuri WhatsApp <span>↗</span></button></div>
+    </dialog>
+
+    <section class="section values-section">
+      <div class="container">
+        <div class="section-heading centered"><div class="section-kicker">IVYO TWEMERA</div><h2>Indangagaciro <span>zacu.</span></h2><p>Kwubaha, kwumviriza no gufasha abantu mu buryo bw'umwuga ni vyo biyobora ibikorwa vyacu.</p><a class="text-link" href="values.html">Menya indangagaciro zacu <span>→</span></a></div>
+        <div class="values-grid">
+          <article class="value-card"><div class="value-icon">✚</div><span class="value-number">01</span><h3>Kwubaha</h3><p>Kwubahiriza agaciro n'ibanga vy'umuntu wese.</p></article>
+          <article class="value-card featured"><div class="value-icon">♡</div><span class="value-number">02</span><h3>Kwumviriza</h3><p>Kwumviriza neza kugira dutahure ico umuntu akeneye.</p></article>
+          <article class="value-card"><div class="value-icon">✓</div><span class="value-number">03</span><h3>Ubufasha bw'umwuga</h3><p>Gutanga amakuru atomoye no gufasha mu bwitonzi.</p></article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-main">
+      <div class="footer-brand-column">
+        <a class="brand brand-footer" href="#home"><span class="brand-mark"><span>✚</span><i></i></span><span class="brand-name">UBUZIMA <b>PHARMA</b><small>UBUZIMA BWANYU NI INTEGO YACU</small></span></a>
+        <p>Imiti yizewe, serivisi irangwa n'ubupfasoni no kwitwararika amagara y'abatugana.</p>
+      </div>
+      <div class="footer-link-column">
+        <h2>Injira zihuse</h2>
+        <a href="#home">Itanguriro</a><a href="about.html">Abo turi bo</a><a href="medicines.html">Imiti iboneka</a>
+      </div>
+      <div class="footer-link-column">
+        <h2>Ivyo twemera</h2>
+        <a href="values.html">Indangagaciro zacu</a><a href="contact.html">Serivisi ku bakiriya</a><a href="medicines.html">Rondera imiti</a>
+      </div>
+      <div class="footer-contact-column">
+        <h2>Twandikire</h2>
+        <p>Kinama, Gitega<br>10é avenue, numéro 57<br>Burundi</p>
+        <a href="https://ubuzimapharma.com" target="_blank" rel="noopener noreferrer">ubuzimapharma.com <span>↗</span></a>
+        <a id="footerWhatsApp" href="contact.html" target="_blank" rel="noopener noreferrer">Twandikire kuri WhatsApp <span>↗</span></a>
+      </div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> UBUZIMA PHARMA. Uburenganzira bwose burakingiwe.</span><a href="values.html">Indangagaciro</a><a href="contact.html">Twandikire</a></div>
+  </footer>
+  <a class="floating-whatsapp" id="floatingWhatsApp" href="#" aria-label="WhatsApp">☏</a>
+</body>
+</html>

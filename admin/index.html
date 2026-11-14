@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064c41">
+  <base href="/admin/">
+  <title>Ubuyobozi | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../config.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body class="admin-app staff-login-page" data-staff-role="admin">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html" aria-label="UBUZIMA PHARMA home"><span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>UBUZIMA BWIZA, UBUZIMA BWIHAWE AGACIRO</small></span></a>
+    <nav class="admin-side-nav" aria-label="Ibice vy'ubuyobozi">
+      <a class="admin-side-link active" href="/admin/" aria-current="page"><span>⌂</span>Dashboard</a>
+      <a class="admin-side-link" href="/admin/orders.html"><span>▤</span>Amabwirizwa <b class="side-count" id="adminSideOrderCount">0</b></a>
+      <a class="admin-side-link" href="/admin/staff.html"><span>♧</span>Abakozi <b class="side-count" id="adminSideStaffCount">0</b></a>
+      <a class="admin-side-link" href="/admin/patients.html"><span>♙</span>Abarwayi <b class="side-count" id="adminSidePatientCount">0</b></a>
+      <a class="admin-side-link" href="/admin/products.html"><span>◇</span>Imiti n'ububiko</a>
+      <span class="admin-nav-group-label">ITANGAZAMAKURU</span>
+      <a class="admin-side-link" href="/admin/news.html"><span>▤</span>Amakuru</a>
+      <a class="admin-side-link" href="/admin/videos.html"><span>▷</span>Video</a>
+      <a class="admin-side-link" href="/admin/settings.html"><span>⚙</span>Igenamiterere</a>
+      <a class="admin-side-link" href="/admin/activity.html"><span>◷</span>Amateka</a>
+    </nav>
+    <div class="admin-sidebar-bottom"><a href="../index.html"><span>↩</span>Subira ku rubuga</a><button type="button" id="staffLogout"><span>⇥</span>Sohoka</button></div>
+  </aside>
+  <div class="admin-workspace">
+    <header class="admin-topbar"><button class="admin-menu-toggle" id="adminMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">ubuyobozi</span></div></div><p>Raba ibiriko biraba muri farumasi yawe.</p><span class="admin-topbar-profile"><span>♙</span><b>Admin</b></span></header>
+    <main class="admin-main">
+      <p class="manager-status admin-global-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
+      <section class="admin-login-view" id="staffLoginPanel"><div class="admin-login-card"><div class="admin-login-mark" aria-hidden="true">✚</div><span class="section-kicker">UBUYOBOZI BWA FARUMASI</span><h1>Ubuyobozi <span>bukuru.</span></h1><p>Injira ukoresheje email yawe yemejwe kugira ucunge ibikorwa vya farumasi.</p><form id="staffLoginForm"><label for="staffEmail">Email y'umuyobozi</label><input id="staffEmail" name="email" type="email" maxlength="254" value="ubuzimapharma@gmail.com" autocomplete="username" required><label for="staffPassword">Ijambobanga</label><input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Injira</button></form></div></section>
+      <section class="admin-dashboard" id="staffDashboard" hidden>
+        <section class="admin-hero"><div class="admin-hero-copy"><span class="admin-hero-kicker">UBUYOBOZI BWA FARUMASI</span><h1>Ubuyobozi bwa farumasi</h1><h2>Ubuyobozi bukuru.</h2><p>Cunga amabwirizwa, abakozi, abarwayi n'ububiko bwa farumasi.</p></div><div class="admin-hero-motto">Imiti yizewe,<br>ubuzima bwiza!</div></section>
+        <div class="admin-summary-grid" aria-label="Incama y'ibarurishamibare">
+          <a class="admin-summary-card summary-blue" href="/admin/orders.html"><span class="summary-icon">▤</span><span class="summary-number" id="adminOrderCount">0</span><b>Amabwirizwa</b><small id="adminPendingCount">0 arindiriye</small><span class="summary-arrow">›</span></a>
+          <a class="admin-summary-card summary-green" href="/admin/staff.html"><span class="summary-icon">♧</span><span class="summary-number" id="adminStaffCount">0</span><b>Abakozi</b><small>Konti z'abakozi</small><span class="summary-arrow">›</span></a>
+          <a class="admin-summary-card summary-purple" href="/admin/patients.html"><span class="summary-icon">♙</span><span class="summary-number" id="adminPatientCount">0</span><b>Abarwayi</b><small>Konti z'abakiriya</small><span class="summary-arrow">›</span></a>
+          <a class="admin-summary-card summary-orange" href="/admin/products.html"><span class="summary-icon">◇</span><span class="summary-number" id="adminProductCount">0</span><b>Imiti mu bubiko</b><small>Ubwoko bw'imiti</small><span class="summary-arrow">›</span></a>
+        </div>
+        <div class="content-publish-shortcuts" aria-label="Ibikorwa vyo gutangaza amakuru">
+          <a class="btn btn-primary" href="/admin/news.html?compose=1">＋ Andika amakuru mashasha</a>
+          <a class="btn btn-outline" href="/admin/videos.html?compose=1">＋ Shiramwo video nshasha</a>
+        </div>
+        <div class="admin-overview-grid">
+          <section class="admin-overview-orders"><section class="manager-panel"><div class="admin-section-heading"><div><span class="section-kicker">IBIKORWA VYA NONE</span><h2>Amabwirizwa y'abarwayi</h2></div><a class="text-link" href="/admin/orders.html">Raba yose ›</a></div><div class="admin-list" id="adminOrders"></div></section></section>
+          <aside class="admin-overview-aside">
+            <section class="admin-quick-panel"><h2><span>▦</span>IBIKORWA VYA NONE</h2><a href="/admin/orders.html"><i class="quick-icon quick-blue">▤</i><span>Amabwirizwa</span><b id="quickOrderCount">0</b><strong>›</strong></a><a href="/admin/staff.html"><i class="quick-icon quick-green">♧</i><span>Abakozi</span><strong>›</strong></a><a href="/admin/patients.html"><i class="quick-icon quick-blue">♙</i><span>Abarwayi</span><strong>›</strong></a><a href="/admin/products.html"><i class="quick-icon quick-orange">◇</i><span>Imiti n'ububiko</span><strong>›</strong></a><a href="/admin/news.html"><i class="quick-icon quick-blue">ⓘ</i><span>Amakuru</span><strong>›</strong></a><a href="/admin/activity.html"><i class="quick-icon quick-green">◷</i><span>Amateka</span><strong>›</strong></a></section>
+            <section class="admin-safety-panel"><h2><span>⬟</span>Umutekano n'ubusugire</h2><ul><li>Amabwirizwa aragenzurwa</li><li>Abakozi barafise uburenganzira butandukanye</li><li>Imiti yemewe irabikwa</li><li>Amakuru y'abakoresha arinzwe</li></ul></section>
+            <a class="admin-promo-card" href="../contact.html"><img src="../assets/pharmacy-consultation.png" alt=""><span>Tugufashe kuzamura ubuzima bw'abatugana.<b>✚</b></span></a>
+          </aside>
+        </div>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Ubuyobozi bwa Farumasi</span><time id="adminCurrentTime"></time></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

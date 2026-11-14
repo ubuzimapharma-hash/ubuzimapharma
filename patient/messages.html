@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="rn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064c41">
+  <title>Ubutumwa bwanje | UBUZIMA PHARMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script defer src="../config.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body id="patientMessagePage" class="admin-app patient-app patient-message-login-page">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="../index.html" aria-label="UBUZIMA PHARMA home"><span class="admin-brand-symbol">✚</span><span>UBUZIMA <b>PHARMA</b><small>UBUZIMA BWAWE NI INTEGO YACU</small></span></a>
+    <nav class="admin-side-nav" aria-label="Igice c'umurwayi"><a class="admin-side-link" href="./"><span>⌂</span>Konti yanje</a><a class="admin-side-link active" href="messages.html" aria-current="page"><span>✉</span>Ubutumwa</a></nav>
+    <div class="admin-sidebar-bottom"><a href="../index.html"><span>↩</span>Subira ku rubuga</a></div>
+  </aside>
+  <div class="admin-workspace">
+    <header class="admin-topbar"><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="patientMessageIdentity">Umurwayi</span></div></div><p>Ubutumwa bw'ibanga n'abakozi ba farumasi canke umuganga.</p><a class="admin-topbar-profile" href="./" aria-label="Subira kuri konti yanje"><span>♙</span><b>Konti yanje</b><i>⌄</i></a></header>
+    <main class="admin-main patient-message-main">
+      <p class="manager-status admin-global-status" id="patientMessageStatus" role="status" aria-live="polite"></p>
+      <section class="admin-login-view" id="patientMessageLoginPanel"><div class="admin-login-card"><div class="admin-login-mark" aria-hidden="true">✚</div><span class="section-kicker">UBUTUMWA BW'IBANGA</span><h1>Injira <span>muri konti.</span></h1><p>Injira kugira ubone kandi urungike ubutumwa bujanye n'igisabwa cawe.</p><form id="patientMessageLoginForm"><label for="patientMessageEmail">Email wakoresheje kwugurura konti</label><input id="patientMessageEmail" name="email" type="email" maxlength="254" autocomplete="username" required><label for="patientMessagePassword">Ijambobanga</label><input id="patientMessagePassword" name="password" type="password" maxlength="72" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Injira</button></form><p class="patient-message-register"><a href="../forgot-password.html?account_type=patient">Wibagiye ijambobanga?</a> · Nta konti ufise? <a href="./">Yugurura konti.</a></p></div></section>
+      <section class="admin-dashboard patient-message-dashboard" id="patientMessageDashboard" hidden>
+        <div class="patient-message-back"><a class="btn btn-outline" href="./">← Subira ku rubuga rw'umurwayi</a></div>
+        <section class="manager-panel patient-messages-panel"><div class="admin-section-heading"><div><span class="section-kicker">IKIGANIRO C'IBANGA</span><h1>Ubutumwa bwanje</h1><p id="patientMessageHeading">Turiko turamenya igisabwa...</p></div><div class="patient-message-toolbar"><button class="btn btn-outline" id="patientMessageChoose" type="button" hidden>Hitamwo ikindi gisabwa</button><button class="btn btn-outline" id="refreshPatientMessages" type="button">Subiramwo</button></div></div><div class="patient-message-thread" id="patientMessageThread" aria-live="polite"><p class="care-message-empty">Turiko turarondera ubutumwa...</p></div><p class="patient-message-closed" id="patientMessageClosedNote" hidden>Iki kiganiro carangiye; ntushobora kurungika ubundi butumwa.</p><form class="care-message-form patient-message-reply" id="patientMessageReply"><textarea name="message" rows="3" maxlength="4000" required placeholder="Andika ubutumwa bwawe..."></textarea><button class="btn btn-primary" type="submit">Rungika ubutumwa</button></form></section>
+        <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Ubutumwa bw'umurwayi</span><a href="../contact.html">Twandikire</a></footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
