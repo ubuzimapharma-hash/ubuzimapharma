@@ -29,7 +29,7 @@ Staff and patient login pages link to password recovery. Recovery emails use the
 
 ## Configuration and local preview
 
-1. In `config.js`, set `apiBaseUrl` to the backend origin (`http://localhost:4000` for local development) and replace `257XXXXXXXX` with the official WhatsApp number.
+1. In `config.js`, `apiBaseUrl` points to the deployed backend (`https://ubuzima-pharma.onrender.com`). For local backend development, change it to `http://localhost:4000`. Replace `257XXXXXXXX` with the official WhatsApp number.
 2. Follow the backend README to configure PostgreSQL, add `STAFF_PASSWORD` to the backend `.env`, and run `npm run create:staff` to provision the initial admin.
 3. Serve this folder on `http://localhost:3000` (for example, run `npx serve . -l 3000`) while the API is running.
 4. Open `index.html`, `medicines.html`, `/admin/`, or `/pharmacist/`.

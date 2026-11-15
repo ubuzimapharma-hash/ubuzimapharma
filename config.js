@@ -5,7 +5,7 @@
   Example format for Burundi: 257XXXXXXXX
 */
 window.UBUZIMA_CONFIG = {
-  apiBaseUrl: "http://localhost:4000",
+  apiBaseUrl: "https://ubuzima-pharma.onrender.com",
   whatsappNumber: "254792965970",
   currency: "Fbu",
   pharmacyName: "UBUZIMA PHARMA",
