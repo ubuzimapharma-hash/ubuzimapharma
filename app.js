@@ -2033,7 +2033,24 @@ function trackPublicViews(container, selector, endpointForId) {
 
 async function loadPublicNews(container) {
   try {
-    renderPublicNews(await apiRequest("/api/news"), container);
+    const articles = await apiRequest("/api/news");
+    const requestedId = new URLSearchParams(window.location.search).get("article")
+      || decodeURIComponent(window.location.hash.slice(1));
+    if (requestedId) {
+      const article = articles.find(item => String(item.id) === requestedId);
+      if (!article) {
+        container.innerHTML = '<p class="empty-state">Iyo nkuru ntiyabonetse. <a href="news.html">Subira ku makuru</a>.</p>';
+        return;
+      }
+      document.title = `${article.title} | UBUZIMA PHARMA`;
+      renderPublicNews([article], container);
+      return;
+    }
+    if (window.location.pathname.endsWith("news-library.html")) {
+      window.location.replace("news.html");
+      return;
+    }
+    renderPublicNews(articles, container);
   } catch (error) {
     container.innerHTML = `<p class="status-error">${escapeHtml(error.message)}</p>`;
   }
@@ -2078,7 +2095,7 @@ function setupUpdatesPage() {
     const query = (search.value || "").trim().toLocaleLowerCase();
     const visible = entries.filter(item => (activeCategory === "All" || item.category === activeCategory) && (!query || `${item.title} ${item.summary || item.description || ""} ${item.category || ""}`.toLocaleLowerCase().includes(query)));
     cards.innerHTML = visible.length ? visible.map(item => {
-      const href = isVideo ? `videos.html#${encodeURIComponent(item.id)}` : `news-library.html#${encodeURIComponent(item.id)}`;
+      const href = isVideo ? `videos.html#${encodeURIComponent(item.id)}` : `news-library.html?article=${encodeURIComponent(item.id)}`;
       const image = isVideo ? (item.thumbnail_url || "") : (item.cover_image_url || item.image_url || "");
       const detail = isVideo ? (item.description || "") : (item.summary || "");
       const date = item.published_at ? new Date(item.published_at).toLocaleDateString() : "";
