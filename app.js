@@ -1919,8 +1919,11 @@ function renderPublicNews(articles, container) {
     const words = (template.content.textContent || "").trim().split(/\s+/).filter(Boolean).length;
     const topics = [];
     let topic = null;
-    Array.from(template.content.querySelectorAll("h1, h2, h3, p, li, blockquote")).forEach(node => {
-      if (/^H[1-3]$/.test(node.tagName)) {
+    Array.from(template.content.querySelectorAll("h1, h2, h3, h4, p, li, blockquote")).forEach(node => {
+      const text = node.textContent.trim();
+      const boldText = node.tagName === "P" ? node.querySelector("strong, b")?.textContent.trim() : "";
+      const isBoldParagraphHeading = boldText && boldText === text && text.length <= 140;
+      if (/^H[1-4]$/.test(node.tagName) || isBoldParagraphHeading) {
         topic = { title: node.textContent.trim(), body: "" };
         topics.push(topic);
       } else if (topic && node.textContent.trim()) topic.body += `${node.textContent.trim()} `;
