@@ -1943,6 +1943,20 @@ function renderPublicNews(articles, container) {
         );
       }
     }
+    if (!topics.length) {
+      const bodyText = (template.content.textContent || article.summary || "").replace(/\s+/g, " ").trim();
+      const sentences = bodyText.split(/(?<=[.!?])\s+/).filter(Boolean);
+      const groupCount = Math.min(3, sentences.length);
+      for (let index = 0; index < groupCount; index += 1) {
+        const start = Math.floor(index * sentences.length / groupCount);
+        const end = Math.floor((index + 1) * sentences.length / groupCount);
+        const body = sentences.slice(start, end).join(" ").trim();
+        if (!body) continue;
+        const firstSentence = sentences[start];
+        const title = firstSentence.length > 88 ? `${firstSentence.slice(0, 85).trim()}...` : firstSentence;
+        topics.push({ title, body });
+      }
+    }
     return { ...article, cover, bodyHtml: template.innerHTML, topics: topics.slice(0, 3), readMinutes: Math.max(1, Math.ceil(words / 200)) };
   });
   const first = prepared[0];
