@@ -1919,7 +1919,7 @@ function renderPublicNews(articles, container) {
     const words = (template.content.textContent || "").trim().split(/\s+/).filter(Boolean).length;
     const topics = [];
     let topic = null;
-    Array.from(template.content.children).forEach(node => {
+    Array.from(template.content.querySelectorAll("h1, h2, h3, p, li, blockquote")).forEach(node => {
       if (/^H[1-3]$/.test(node.tagName)) {
         topic = { title: node.textContent.trim(), body: "" };
         topics.push(topic);
