@@ -90,7 +90,7 @@ function setStatus(message, isError = false) {
 }
 
 function formatSaleDate(value) {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ""));
+  const match = /^(\d{4})-(\d{2})-(\d{2})(?:$|T.*$)/.exec(String(value || ""));
   if (!match) return String(value || "");
   return new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeZone: "UTC" }).format(new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]))));
 }
@@ -562,6 +562,11 @@ function setupStaffSalesForm() {
       status.hidden = false;
       setStatus("Sale recorded");
       if (document.body.dataset.staffRole === "admin") {
+        const earningsFilter = $("#adminEarningsFilter");
+        if (earningsFilter && selectedSaleDate) {
+          earningsFilter.elements.from.value = selectedSaleDate;
+          earningsFilter.elements.to.value = selectedSaleDate;
+        }
         try { await loadAdminEarnings(); } catch (error) { showAdminEarningsError(error); }
       }
     } catch (error) {
