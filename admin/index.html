@@ -47,6 +47,27 @@
           <a class="btn btn-primary" href="/admin/news.html?compose=1">＋ Andika amakuru mashasha</a>
           <a class="btn btn-outline" href="/admin/videos.html?compose=1">＋ Shiramwo video nshasha</a>
         </div>
+        <section class="manager-panel" aria-labelledby="adminSalesEntryTitle">
+          <div class="admin-section-heading"><div><span class="section-kicker">UGURISHA RYA NONE</span><h2 id="adminSalesEntryTitle">Andika igurisha</h2></div></div>
+          <form id="staffSalesForm" enctype="multipart/form-data">
+            <label for="saleAmount">Amafaranga yagurishijwe (BIF)</label>
+            <input id="saleAmount" name="amount_bif" type="number" min="1" max="999999999999" step="1" inputmode="numeric" required>
+            <label for="saleImage">Ifoto y'igurisha</label>
+            <input id="saleImage" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
+            <small class="form-help">JPEG, PNG canke WebP; ntirenge 5 MB.</small>
+            <div class="manager-form-actions"><button class="btn btn-primary" type="submit">Bika igurisha</button></div>
+            <p class="form-help" id="staffSalesStatus" role="status" aria-live="polite" hidden></p>
+          </form>
+        </section>
+        <section class="manager-panel" aria-labelledby="adminEarningsTitle">
+          <div class="admin-section-heading"><div><span class="section-kicker">RAPORO Y'AMAFARANGA</span><h2 id="adminEarningsTitle">Ugushora n'inyungu zigereranijwe</h2></div></div>
+          <form id="adminEarningsFilter" class="admin-filter-form">
+            <label for="earningsFrom">Kuva</label><input id="earningsFrom" name="from" type="date">
+            <label for="earningsTo">Gushika</label><input id="earningsTo" name="to" type="date">
+            <button class="btn btn-outline" type="submit">Raba raporo</button>
+          </form>
+          <div id="adminEarningsReport" aria-live="polite"><p class="empty-state">Riko ririko rirafungurwa...</p></div>
+        </section>
         <div class="admin-overview-grid">
           <section class="admin-overview-orders"><section class="manager-panel"><div class="admin-section-heading"><div><span class="section-kicker">IBIKORWA VYA NONE</span><h2>Amabwirizwa y'abarwayi</h2></div><a class="text-link" href="/admin/orders.html">Raba yose ›</a></div><div class="admin-list" id="adminOrders"></div></section></section>
           <aside class="admin-overview-aside">

@@ -499,6 +499,84 @@ async function reloadStaffData() {
   if (document.body.dataset.staffRole === "admin") await loadAdminData();
 }
 
+function setupStaffSalesForm() {
+  const form = $("#staffSalesForm");
+  if (!form) return;
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const file = $("#saleImage").files[0];
+    const status = $("#staffSalesStatus");
+    if (!file || !["image/jpeg", "image/png", "image/webp"].includes(file.type) || file.size > 5 * 1024 * 1024) {
+      status.textContent = "Hitamwo ifoto ya JPEG, PNG canke WebP itarenza 5 MB.";
+      status.classList.add("status-error");
+      status.hidden = false;
+      return;
+    }
+    status.hidden = true;
+    status.classList.remove("status-error");
+    const button = form.querySelector('[type="submit"]');
+    button.disabled = true;
+    try {
+      await adminRequest("/api/staff/sales", { method: "POST", body: new FormData(form) });
+      form.reset();
+      status.textContent = "Sale recorded";
+      status.hidden = false;
+      setStatus("Sale recorded");
+      if (document.body.dataset.staffRole === "admin") {
+        try { await loadAdminEarnings(); } catch (error) { showAdminEarningsError(error); }
+      }
+    } catch (error) {
+      status.textContent = error.message;
+      status.classList.add("status-error");
+      status.hidden = false;
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
+function setupAdminEarnings() {
+  const form = $("#adminEarningsFilter");
+  if (!form) return;
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    loadAdminEarnings().catch(error => showAdminEarningsError(error));
+  });
+}
+
+function showAdminEarningsError(error) {
+  const target = $("#adminEarningsReport");
+  if (target) target.innerHTML = `<p class="status-error" role="alert">${escapeHtml(error.message)}</p>`;
+}
+
+async function loadAdminEarnings() {
+  const target = $("#adminEarningsReport");
+  if (!target || document.body.dataset.staffRole !== "admin") return;
+  const form = $("#adminEarningsFilter");
+  const params = new URLSearchParams();
+  if (form?.querySelector('[name="from"]').value) params.set("from", form.querySelector('[name="from"]').value);
+  if (form?.querySelector('[name="to"]').value) params.set("to", form.querySelector('[name="to"]').value);
+  const query = params.size ? `?${params}` : "";
+  const report = await adminRequest(`/api/admin/earnings${query}`);
+  const value = (...keys) => {
+    for (const key of keys) if (report[key] !== undefined) return report[key];
+    return 0;
+  };
+  const sales = report.sales || report.sale_records || report.records || [];
+  const labels = [
+    ["Daily sales", value("daily_sales_bif", "total_sales_bif", "sales_bif")],
+    ["Estimated gross profit", value("estimated_gross_profit_bif", "gross_profit_bif")],
+    ["Fixed expense allocation", value("fixed_expense_allocation_bif", "fixed_expense_bif", "fixed_cost_allocation_bif", "fixed_expenses_bif")],
+    ["Estimated earnings", value("estimated_earnings_bif", "earnings_bif")]
+  ];
+  target.innerHTML = `<div class="admin-summary-grid">${labels.map(([label, amount]) => `<article class="admin-summary-card"><b>${label}</b><span class="summary-number">${escapeHtml(formatCurrency(amount))}</span></article>`).join("")}</div>
+    <h3>Sale records</h3>${sales.length ? `<div class="admin-list">${sales.map(sale => {
+      const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.image;
+      const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";
+      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(sale.created_at || sale.recorded_at || sale.date || "")}</small>${photoLink}</article>`;
+    }).join("")}</div>` : '<p class="empty-state">No sale records for this period.</p>'}`;
+}
+
 function updatePharmacistSummary() {
   const total = products.length;
   const available = products.filter(product => product.is_available).length;
@@ -1125,6 +1203,11 @@ async function loadAdminData() {
     const element = $(selector);
     if (element) element.textContent = String(value);
   });
+  try {
+    await loadAdminEarnings();
+  } catch (error) {
+    showAdminEarningsError(error);
+  }
 }
 
 function renderAdminOrders(orders) {
@@ -2886,6 +2969,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupProductDetailPage();
   setupProductManager();
   setupStaffAccess();
+  setupStaffSalesForm();
+  setupAdminEarnings();
   setupStaffProfile();
   setupAdminDashboard();
   setupPharmacistDashboard();

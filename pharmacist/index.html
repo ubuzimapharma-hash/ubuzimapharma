@@ -75,6 +75,19 @@
           <a class="btn btn-outline" href="/pharmacist/videos?compose=1">＋ Shiramwo video nshasha</a>
         </div>
 
+        <section class="pharmacist-panel manager-panel" aria-labelledby="pharmacistSalesTitle">
+          <div class="admin-section-heading"><div><span class="section-kicker">UGURISHA RYA NONE</span><h2 id="pharmacistSalesTitle">Andika igurisha</h2></div></div>
+          <form id="staffSalesForm" enctype="multipart/form-data">
+            <label for="saleAmount">Amafaranga yagurishijwe (BIF)</label>
+            <input id="saleAmount" name="amount_bif" type="number" min="1" max="999999999999" step="1" inputmode="numeric" required>
+            <label for="saleImage">Ifoto y'igurisha</label>
+            <input id="saleImage" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
+            <small class="form-help">JPEG, PNG canke WebP; ntirenge 5 MB.</small>
+            <div class="manager-form-actions"><button class="btn btn-primary" type="submit">Bika igurisha</button></div>
+            <p class="form-help" id="staffSalesStatus" role="status" aria-live="polite" hidden></p>
+          </form>
+        </section>
+
         <div class="pharmacist-content-grid">
           <div class="pharmacist-main-panel">
             <section class="pharmacist-panel manager-panel" id="pharmacistPanelInventory">
