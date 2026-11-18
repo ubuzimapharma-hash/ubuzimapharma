@@ -89,6 +89,12 @@ function setStatus(message, isError = false) {
   });
 }
 
+function formatSaleDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ""));
+  if (!match) return String(value || "");
+  return new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeZone: "UTC" }).format(new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]))));
+}
+
 function formatBurundiDateTime(value) {
   if (!value) return "";
   const date = new Date(value);
@@ -513,6 +519,12 @@ async function reloadStaffData() {
 function setupStaffSalesForm() {
   const form = $("#staffSalesForm");
   if (!form) return;
+  const saleDateInput = $("#saleDate");
+  if (saleDateInput && !saleDateInput.value) {
+    const parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Bujumbura", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+    const dateParts = Object.fromEntries(parts.filter(part => part.type !== "literal").map(part => [part.type, part.value]));
+    saleDateInput.value = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+  }
   const imageInput = $("#saleImage");
   const imageSelection = $("#saleImageSelection");
   form.querySelectorAll("[data-sale-photo-mode]").forEach(button => button.addEventListener("click", () => {
@@ -533,6 +545,7 @@ function setupStaffSalesForm() {
       status.hidden = false;
       return;
     }
+    const selectedSaleDate = saleDateInput?.value || "";
     status.hidden = true;
     status.classList.remove("status-error");
     const button = form.querySelector('[type="submit"]');
@@ -540,10 +553,12 @@ function setupStaffSalesForm() {
     try {
       const result = await adminRequest("/api/staff/sales", { method: "POST", body: new FormData(form) });
       form.reset();
+      if (saleDateInput) saleDateInput.value = selectedSaleDate;
       if (imageSelection) imageSelection.textContent = "No photo selected.";
       const sale = result?.sale || result?.record || result?.sale_record || result;
       const recordedAt = sale?.created_at || sale?.recorded_at || sale?.sold_at || sale?.timestamp;
-      status.textContent = recordedAt ? `Sale recorded · ${formatBurundiDateTime(recordedAt)} (Burundi time)` : "Sale recorded";
+      const saleDate = sale?.sale_date || selectedSaleDate;
+      status.textContent = `${saleDate ? `Sale recorded for ${formatSaleDate(saleDate)}. ` : "Sale recorded. "}${recordedAt ? `Recorded ${formatBurundiDateTime(recordedAt)} (Burundi time)` : ""}`.trim();
       status.hidden = false;
       setStatus("Sale recorded");
       if (document.body.dataset.staffRole === "admin") {
@@ -598,9 +613,11 @@ async function loadAdminEarnings() {
   const recordsHtml = `${sales.length ? `<div class="admin-list">${sales.map(sale => {
       const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.private_photo_link || sale.photo || sale.image;
       const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";
-      const recordedAt = sale.created_at || sale.recorded_at || sale.sold_at || sale.timestamp || sale.date;
+      const recordedAt = sale.created_at || sale.recorded_at || sale.sold_at || sale.timestamp;
       const dateTime = formatBurundiDateTime(recordedAt);
-      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(dateTime || "Recorded time unavailable")}${dateTime ? " · Burundi time" : ""}</small>${photoLink}</article>`;
+      const saleDate = formatSaleDate(sale.sale_date);
+      const details = [saleDate && `Sale date: ${saleDate}`, dateTime && `Recorded: ${dateTime} (Burundi time)`].filter(Boolean).join(" | ");
+      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(details || "Sale date and recorded time unavailable")}</small>${photoLink}</article>`;
     }).join("")}</div>` : '<p class="empty-state">No sale records for this period.</p>'}`;
   target.innerHTML = metricsHtml;
   const records = $("#adminEarningsRecords");
