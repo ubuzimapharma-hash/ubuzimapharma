@@ -563,18 +563,22 @@ async function loadAdminEarnings() {
     return 0;
   };
   const sales = report.sales || report.sale_records || report.records || [];
+  renderAdminSalesChart(sales);
   const labels = [
     ["Daily sales", value("daily_sales_bif", "total_sales_bif", "sales_bif")],
     ["Estimated gross profit", value("estimated_gross_profit_bif", "gross_profit_bif")],
     ["Fixed expense allocation", value("fixed_expense_allocation_bif", "fixed_expense_bif", "fixed_cost_allocation_bif", "fixed_expenses_bif")],
     ["Estimated earnings", value("estimated_earnings_bif", "earnings_bif")]
   ];
-  target.innerHTML = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div>
-    <h3>Sale records</h3>${sales.length ? `<div class="admin-list">${sales.map(sale => {
-      const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.image;
+  const metricsHtml = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div>`;
+  const recordsHtml = `${sales.length ? `<div class="admin-list">${sales.map(sale => {
+      const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.private_photo_link || sale.photo || sale.image;
       const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";
       return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(sale.created_at || sale.recorded_at || sale.date || "")}</small>${photoLink}</article>`;
     }).join("")}</div>` : '<p class="empty-state">No sale records for this period.</p>'}`;
+  target.innerHTML = metricsHtml;
+  const records = $("#adminEarningsRecords");
+  if (records) records.innerHTML = recordsHtml;
 }
 
 function updatePharmacistSummary() {
@@ -591,6 +595,14 @@ function updatePharmacistSummary() {
     const element = $(selector);
     if (element) element.textContent = String(count);
   });
+  const setText = (selector, value) => { const element = $(selector); if (element) element.textContent = String(value); };
+  setText("#pharmacistStockTotal", total);
+  setText("#pharmacistAvailableLabel", available);
+  setText("#pharmacistLowStockLabel", lowStock);
+  const availableBar = $("#pharmacistAvailableBar");
+  const lowStockBar = $("#pharmacistLowStockBar");
+  if (availableBar) availableBar.style.width = `${total ? Math.round(available / total * 100) : 0}%`;
+  if (lowStockBar) lowStockBar.style.width = `${total ? Math.round(lowStock / total * 100) : 0}%`;
 }
 
 async function toggleProductAvailability(id) {
@@ -627,7 +639,8 @@ async function loadAuditLogs() {
   const list = $("#auditLogList");
   if (!list) return;
   const entries = await adminRequest("/api/admin/audit-logs");
-  list.innerHTML = entries.length ? entries.map(entry => `
+  const visibleEntries = $("#adminRecentPanel") ? entries.slice(0, 4) : entries;
+  list.innerHTML = visibleEntries.length ? visibleEntries.map(entry => `
     <article class="audit-log-entry">
       <b>${escapeHtml(entry.action)}</b>
       <span>${escapeHtml(entry.details?.name || "")}</span>
@@ -1189,7 +1202,7 @@ async function loadAdminData() {
   renderPatientAccounts(patients);
   renderStaffInvitations(invitations);
   const counts = {
-    "#adminOrderCount": orders.length,
+    "#adminOrderCount": orders.filter(order => order.status === "pending").length,
     "#adminPendingCount": `${orders.filter(order => order.status === "pending").length} arindiriye`,
     "#adminStaffCount": staff.length,
     "#adminPatientCount": patients.length,
@@ -1208,6 +1221,34 @@ async function loadAdminData() {
   } catch (error) {
     showAdminEarningsError(error);
   }
+}
+
+function renderAdminSalesChart(sales) {
+  const chart = $("#adminSalesChart");
+  if (!chart) return;
+  const line = $("#adminSalesLine");
+  const area = $("#adminSalesArea");
+  const points = $("#adminSalesPoints");
+  const empty = $("#adminSalesChartEmpty");
+  const panel = chart.closest(".admin-chart-panel");
+  const totals = Array(24).fill(0);
+  sales.forEach(sale => {
+    const date = new Date(sale.created_at || sale.recorded_at || sale.date || "");
+    if (!Number.isFinite(date.getTime())) return;
+    const hour = Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Bujumbura", hour: "2-digit", hourCycle: "h23" }).format(date));
+    totals[hour] += Number(sale.amount_bif ?? sale.amount ?? 0);
+  });
+  const max = Math.max(100000, Math.ceil(Math.max(...totals) / 25000) * 25000);
+  const scale = $("#adminChartScale");
+  if (scale) [...scale.children].forEach((label, index) => { const amount = Math.round(max * (4 - index) / 4); label.textContent = amount ? `${Math.round(amount / 1000)}k` : "0"; });
+  const coords = totals.map((amount, hour) => [hour * (600 / 23), 175 - amount / max * 160]);
+  const path = coords.map(([x, y], index) => `${index ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
+  line.setAttribute("d", path);
+  area.setAttribute("d", `${path} L600 175 L0 175 Z`);
+  points.innerHTML = coords.filter((_, index) => totals[index] > 0).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4"/>`).join("");
+  empty.hidden = sales.length > 0;
+  chart.hidden = sales.length === 0;
+  panel.classList.toggle("no-sales", sales.length === 0);
 }
 
 function renderAdminOrders(orders) {
@@ -1329,12 +1370,11 @@ function setupAdminDashboard() {
       if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
     });
   });
-  const currentTime = $("#adminCurrentTime");
-  if (currentTime) {
+  const currentTimes = ["#adminCurrentTime", "#adminHeaderTime", "#pharmacistCurrentTime"].map(selector => $(selector)).filter(Boolean);
+  if (currentTimes.length) {
     const updateTime = () => {
-      currentTime.textContent = `◷  None: ${new Intl.DateTimeFormat("en-GB", {
-        day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
-      }).format(new Date())}`;
+      const label = `None: ${new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Africa/Bujumbura" }).format(new Date())}`;
+      currentTimes.forEach(element => { element.textContent = label; });
     };
     updateTime();
     window.setInterval(updateTime, 60_000);

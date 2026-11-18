@@ -22,6 +22,7 @@
       <a class="admin-side-link" href="/admin/staff.html"><span>♧</span>Abakozi <b class="side-count" id="adminSideStaffCount">0</b></a>
       <a class="admin-side-link" href="/admin/patients.html"><span>♙</span>Abarwayi <b class="side-count" id="adminSidePatientCount">0</b></a>
       <a class="admin-side-link" href="/admin/products.html"><span>◇</span>Imiti n'ububiko</a>
+      <a class="admin-side-link" href="/admin/sales.html"><span>▥</span>Ugushora n'amafaranga</a>
       <span class="admin-nav-group-label">ITANGAZAMAKURU</span>
       <a class="admin-side-link" href="/admin/news.html"><span>▤</span>Amakuru</a>
       <a class="admin-side-link" href="/admin/videos.html"><span>▷</span>Video</a>
@@ -31,52 +32,25 @@
     <div class="admin-sidebar-bottom"><a href="../index.html"><span>↩</span>Subira ku rubuga</a><button type="button" id="staffLogout"><span>⇥</span>Sohoka</button></div>
   </aside>
   <div class="admin-workspace">
-    <header class="admin-topbar"><button class="admin-menu-toggle" id="adminMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">ubuyobozi</span></div></div><p>Raba ibiriko biraba muri farumasi yawe.</p><span class="admin-topbar-profile"><span>♙</span><b>Admin</b></span></header>
+    <header class="admin-topbar"><button class="admin-menu-toggle" id="adminMenuToggle" type="button" aria-label="Fungura urutonde" aria-expanded="false">☰</button><div class="admin-topbar-identity"><span class="admin-mail-icon">✉</span><div><b>Murakaza neza,</b><span id="staffIdentity">ubuyobozi</span></div></div><p id="adminHeaderTime"></p><span class="admin-topbar-profile"><span>♙</span><b>Admin</b></span></header>
     <main class="admin-main">
       <p class="manager-status admin-global-status" id="managerStatus" role="status" aria-live="polite" hidden></p>
       <section class="admin-login-view" id="staffLoginPanel"><div class="admin-login-card"><div class="admin-login-mark" aria-hidden="true">✚</div><span class="section-kicker">UBUYOBOZI BWA FARUMASI</span><h1>Ubuyobozi <span>bukuru.</span></h1><p>Injira ukoresheje email yawe yemejwe kugira ucunge ibikorwa vya farumasi.</p><form id="staffLoginForm"><label for="staffEmail">Email y'umuyobozi</label><input id="staffEmail" name="email" type="email" maxlength="254" value="ubuzimapharma@gmail.com" autocomplete="username" required><label for="staffPassword">Ijambobanga</label><input id="staffPassword" name="password" type="password" maxlength="72" autocomplete="current-password" required><button class="btn btn-primary" type="submit">Injira</button></form></div></section>
       <section class="admin-dashboard" id="staffDashboard" hidden>
-        <section class="admin-hero"><div class="admin-hero-copy"><span class="admin-hero-kicker">UBUYOBOZI BWA FARUMASI</span><h1>Ubuyobozi bwa farumasi</h1><h2>Ubuyobozi bukuru.</h2><p>Cunga amabwirizwa, abakozi, abarwayi n'ububiko bwa farumasi.</p></div><div class="admin-hero-motto">Imiti yizewe,<br>ubuzima bwiza!</div></section>
+        <section class="admin-hero admin-dashboard-hero"><div class="admin-hero-copy"><span class="admin-hero-kicker">✓ Winjiye neza</span><h1>UBUZIMA PHARMA</h1><h2>Ubuyobozi bwa Farumasi</h2><p>Cunga amabwirizwa, abakozi, abarwayi n'ububiko bwa farumasi.</p></div><div class="admin-hero-motto">Imiti yizewe,<br>ubuzima bwiza!</div></section>
         <div class="admin-summary-grid" aria-label="Incama y'ibarurishamibare">
-          <a class="admin-summary-card summary-blue" href="/admin/orders.html"><span class="summary-icon">▤</span><span class="summary-number" id="adminOrderCount">0</span><b>Amabwirizwa</b><small id="adminPendingCount">0 arindiriye</small><span class="summary-arrow">›</span></a>
+          <a class="admin-summary-card summary-blue" href="/admin/orders.html"><span class="summary-icon">▤</span><span class="summary-number" id="adminOrderCount">0</span><b>Amabwirizwa</b><small>Arindiriye kwemezwa</small><span class="summary-arrow">›</span></a>
           <a class="admin-summary-card summary-green" href="/admin/staff.html"><span class="summary-icon">♧</span><span class="summary-number" id="adminStaffCount">0</span><b>Abakozi</b><small>Konti z'abakozi</small><span class="summary-arrow">›</span></a>
           <a class="admin-summary-card summary-purple" href="/admin/patients.html"><span class="summary-icon">♙</span><span class="summary-number" id="adminPatientCount">0</span><b>Abarwayi</b><small>Konti z'abakiriya</small><span class="summary-arrow">›</span></a>
           <a class="admin-summary-card summary-orange" href="/admin/products.html"><span class="summary-icon">◇</span><span class="summary-number" id="adminProductCount">0</span><b>Imiti mu bubiko</b><small>Ubwoko bw'imiti</small><span class="summary-arrow">›</span></a>
         </div>
-        <div class="content-publish-shortcuts" aria-label="Ibikorwa vyo gutangaza amakuru">
-          <a class="btn btn-primary" href="/admin/news.html?compose=1">＋ Andika amakuru mashasha</a>
-          <a class="btn btn-outline" href="/admin/videos.html?compose=1">＋ Shiramwo video nshasha</a>
+        <div class="admin-dashboard-panels">
+          <section class="dashboard-panel admin-chart-panel"><div class="dashboard-panel-heading"><div><span>&#9638;</span><div><small>UGURISHA RYA NONE</small><h2>Amakuru y'igurisha</h2></div></div><a href="/admin/sales.html">Raba yose &#8594;</a></div><div class="admin-chart-wrap"><div class="admin-chart-scale" id="adminChartScale"><span>100k</span><span>75k</span><span>50k</span><span>25k</span><span>0</span></div><svg id="adminSalesChart" viewBox="0 0 600 190" role="img" aria-label="Igishushanyo c'igurisha rya none"><defs><linearGradient id="adminChartGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#58c875" stop-opacity=".38"/><stop offset="100%" stop-color="#58c875" stop-opacity=".02"/></linearGradient></defs><path class="chart-grid-line" d="M0 15H600 M0 55H600 M0 95H600 M0 135H600 M0 175H600"/><path id="adminSalesArea" class="chart-area" d=""/><path id="adminSalesLine" class="chart-line" d=""/><g id="adminSalesPoints"></g></svg></div><div class="admin-chart-axis"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span></div><p id="adminSalesChartEmpty" class="empty-state" hidden>Nta gurisha ryanditswe muri iki gihe.</p></section>
+          <section class="dashboard-panel admin-earnings-panel"><div class="dashboard-panel-heading"><div><span>&#9638;</span><div><small>RAPORO Y'AMAFARANGA</small><h2>Ugushora n'inyungu zigereranijwe</h2></div></div></div><div id="adminEarningsReport" aria-live="polite"><div class="admin-earnings-metrics"></div></div><a class="dashboard-panel-link" href="/admin/sales.html">Raba raporo yose n'amafoto &#8594;</a></section>
         </div>
-        <div class="admin-sales-grid">
-        <section class="manager-panel admin-sales-entry" aria-labelledby="adminSalesEntryTitle">
-          <div class="admin-section-heading"><div><span class="section-kicker">UGURISHA RYA NONE</span><h2 id="adminSalesEntryTitle">Andika igurisha</h2></div></div>
-          <form id="staffSalesForm" enctype="multipart/form-data">
-            <label for="saleAmount">Amafaranga yagurishijwe (BIF)</label>
-            <input id="saleAmount" name="amount_bif" type="number" min="1" max="999999999999" step="1" inputmode="numeric" required>
-            <label for="saleImage">Ifoto y'igurisha</label>
-            <input id="saleImage" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
-            <small class="form-help">JPEG, PNG canke WebP; ntirenge 5 MB.</small>
-            <div class="manager-form-actions"><button class="btn btn-primary" type="submit">Bika igurisha</button></div>
-            <p class="form-help" id="staffSalesStatus" role="status" aria-live="polite" hidden></p>
-          </form>
-        </section>
-        <section class="manager-panel admin-earnings-panel" aria-labelledby="adminEarningsTitle">
-          <div class="admin-section-heading"><div><span class="section-kicker">RAPORO Y'AMAFARANGA</span><h2 id="adminEarningsTitle">Ugushora n'inyungu zigereranijwe</h2></div></div>
-          <form id="adminEarningsFilter" class="admin-filter-form">
-            <label for="earningsFrom">Kuva</label><input id="earningsFrom" name="from" type="date">
-            <label for="earningsTo">Gushika</label><input id="earningsTo" name="to" type="date">
-            <button class="btn btn-outline" type="submit">Raba raporo</button>
-          </form>
-          <div id="adminEarningsReport" aria-live="polite"><p class="empty-state">Riko ririko rirafungurwa...</p></div>
-        </section>
-        </div>
-        <div class="admin-overview-grid">
-          <section class="admin-overview-orders"><section class="manager-panel"><div class="admin-section-heading"><div><span class="section-kicker">IBIKORWA VYA NONE</span><h2>Amabwirizwa y'abarwayi</h2></div><a class="text-link" href="/admin/orders.html">Raba yose ›</a></div><div class="admin-list" id="adminOrders"></div></section></section>
-          <aside class="admin-overview-aside">
-            <section class="admin-quick-panel"><h2><span>▦</span>IBIKORWA VYA NONE</h2><a href="/admin/orders.html"><i class="quick-icon quick-blue">▤</i><span>Amabwirizwa</span><b id="quickOrderCount">0</b><strong>›</strong></a><a href="/admin/staff.html"><i class="quick-icon quick-green">♧</i><span>Abakozi</span><strong>›</strong></a><a href="/admin/patients.html"><i class="quick-icon quick-blue">♙</i><span>Abarwayi</span><strong>›</strong></a><a href="/admin/products.html"><i class="quick-icon quick-orange">◇</i><span>Imiti n'ububiko</span><strong>›</strong></a><a href="/admin/news.html"><i class="quick-icon quick-blue">ⓘ</i><span>Amakuru</span><strong>›</strong></a><a href="/admin/activity.html"><i class="quick-icon quick-green">◷</i><span>Amateka</span><strong>›</strong></a></section>
-            <section class="admin-safety-panel"><h2><span>⬟</span>Umutekano n'ubusugire</h2><ul><li>Amabwirizwa aragenzurwa</li><li>Abakozi barafise uburenganzira butandukanye</li><li>Imiti yemewe irabikwa</li><li>Amakuru y'abakoresha arinzwe</li></ul></section>
-            <a class="admin-promo-card" href="../contact.html"><img src="../assets/pharmacy-consultation.png" alt=""><span>Tugufashe kuzamura ubuzima bw'abatugana.<b>✚</b></span></a>
-          </aside>
+        <div class="admin-dashboard-bottom">
+          <section class="dashboard-panel admin-security-panel"><div class="dashboard-panel-heading"><div><span>&#9638;</span><div><small>UBUYOBOZI BWA FARUMASI</small><h2>Umutekano n'ubusugire</h2></div></div></div><div class="security-checks"><div><b>&#10003;</b>Amabwirizwa aragenzurwa</div><div><b>&#10003;</b>Abakozi bafise uburenganzira</div><div><b>&#10003;</b>Imiti yemewe irabikwa</div><div><b>&#10003;</b>Amakuru arinzwe</div></div></section>
+          <section class="dashboard-panel admin-recent-panel" id="adminRecentPanel"><div class="dashboard-panel-heading"><div><span>&#9638;</span><div><small>GUKURIKIRANA</small><h2>Ibikorwa vya vuba</h2></div></div><a href="/admin/activity.html">Raba vyose &#8594;</a></div><div class="audit-log-list" id="auditLogList"></div></section>
         </div>
         <footer class="admin-footer"><b>UBUZIMA PHARMA</b><span>Ubuyobozi bwa Farumasi</span><time id="adminCurrentTime"></time></footer>
       </section>

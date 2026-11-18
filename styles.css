@@ -514,6 +514,75 @@
 .admin-dashboard>.admin-team-grid.admin-page-content,.admin-dashboard>.admin-products-grid.admin-page-content,.admin-dashboard>.admin-news-grid.admin-page-content{margin-bottom:0}
 .admin-page-content>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:9px;background:#fff}
 .admin-sales-grid{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.5fr);align-items:start;gap:16px;margin:0 0 18px}
+.admin-dashboard-hero{min-height:175px;border-radius:15px;background:#e6f4ed}
+.admin-dashboard-hero:before{background:linear-gradient(90deg,#effaf4 0%,#ebf8f0ed 42%,#e7f5ed66 73%,#eaf8ef70 100%),url("assets/pharmacy-consultation.png") center 42%/cover no-repeat}
+.admin-dashboard-hero .admin-hero-kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:9px;padding:7px 12px;border-radius:30px;background:#c9f3d4;color:#06743e;font-size:11px;letter-spacing:0}
+.admin-dashboard-hero h1{font-size:clamp(27px,3vw,39px);letter-spacing:.2px}
+.admin-dashboard-hero h2{font-size:20px}
+.admin-dashboard-panels,.admin-dashboard-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:15px;margin:0 0 15px}
+.admin-dashboard-bottom{grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr)}
+.dashboard-panel{min-width:0;padding:16px;border:1px solid #dce8e5;border-radius:14px;background:#fff;box-shadow:0 5px 18px #183d2b08}
+.dashboard-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.dashboard-panel-heading>div{display:flex;align-items:center;gap:11px;min-width:0}
+.dashboard-panel-heading>div>span{color:#078350;font-size:27px;font-weight:800}
+.dashboard-panel-heading small{display:block;color:#087b4a;font-size:9px;font-weight:800;letter-spacing:.7px}
+.dashboard-panel-heading h2{margin:3px 0 0;color:#193e37;font:800 16px Manrope,sans-serif}
+.dashboard-panel-heading>a{flex:none;color:#1671bf;font-size:10px;font-weight:700;text-decoration:none}
+.admin-chart-panel{min-height:270px}
+.admin-chart-wrap{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:stretch}
+.admin-chart-scale{display:flex;flex-direction:column;justify-content:space-between;padding:0 0 4px;color:#1c252b;font-size:9px}
+.admin-chart-wrap svg{display:block;width:100%;height:auto;min-height:150px;overflow:visible}
+.chart-grid-line{fill:none;stroke:#dce4e5;stroke-width:1;stroke-dasharray:4 4}
+.chart-area{fill:url(#adminChartGradient);fill:#d6f2df;opacity:.8}
+.chart-line{fill:none;stroke:#0c9440;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+#adminSalesPoints circle{fill:#0b9140;stroke:white;stroke-width:2}
+.admin-chart-axis{display:flex;justify-content:space-between;margin:4px 0 0 41px;color:#303a3e;font-size:9px}
+.admin-chart-panel .empty-state{margin:4px 0 0}
+.admin-chart-panel.no-sales .admin-chart-wrap,.admin-chart-panel.no-sales .admin-chart-axis{display:none}
+.admin-earnings-panel{display:flex;flex-direction:column;gap:11px}
+.admin-earnings-panel .dashboard-panel-heading{align-items:flex-start;flex-wrap:wrap}
+.admin-earnings-panel .dashboard-panel-heading>div{flex:1 1 190px}
+.admin-filter-form{padding:0;border:0;background:transparent}
+.admin-earnings-panel .admin-filter-form{justify-content:flex-end}
+.admin-filter-form label{display:grid;gap:4px;margin:0;color:#526c79;font-size:9px;font-weight:700}
+.admin-earnings-panel .admin-filter-form input{min-width:110px;padding:6px 8px;font-size:10px}
+.admin-filter-form .btn{min-height:30px;padding:6px 10px;font-size:10px}
+.admin-earnings-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.admin-earnings-metric{gap:5px;padding:11px;border-color:#e1e9e8;background:#f8fbfa}
+.admin-earnings-metric span{font-size:9px}
+.admin-earnings-metric b{font-size:16px}
+.dashboard-panel-link{align-self:flex-start;color:#117b50;font-size:10px;font-weight:700;text-decoration:none}
+.admin-dashboard-bottom .admin-recent-panel{min-height:145px}
+.admin-dashboard-bottom .audit-log-list{display:grid;gap:6px;max-height:160px;overflow:auto}
+.admin-dashboard-bottom .audit-log-entry{display:grid;grid-template-columns:1fr auto;gap:3px 10px;padding:8px 10px;border:0;border-left:3px solid #31a46d;border-radius:6px;background:#f7faf9}
+.admin-dashboard-bottom .audit-log-entry>b{font-size:10px}
+.admin-dashboard-bottom .audit-log-entry>span{grid-column:1/-1;color:#607783;font-size:9px}
+.admin-dashboard-bottom .audit-log-entry>small{grid-column:2;grid-row:1;color:#75868b;font-size:8px}
+.security-checks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
+.security-checks>div{display:grid;grid-template-columns:24px 1fr;align-items:center;gap:7px;min-height:50px;padding:7px 10px;border-right:1px solid #d7e7df;color:#314b48;font-size:9px;line-height:1.4}
+.security-checks>div:last-child{border:0}
+.security-checks b{color:#118442;font-size:19px}
+.pharmacist-stock-panel,.pharmacist-actions-panel{min-height:270px}
+.stock-overview{display:grid;grid-template-columns:130px minmax(0,1fr);align-items:center;gap:20px;min-height:180px;padding:15px;border-radius:10px;background:#f7fbf8}
+.stock-total{display:grid;justify-items:center;gap:4px;padding:18px 5px;border:1px solid #dceee2;border-radius:12px;background:#fff}
+.stock-total b{color:#067a48;font:800 34px Manrope,sans-serif}
+.stock-total span{color:#5d7771;font-size:9px;text-align:center}
+.stock-bars{display:grid;gap:20px}
+.stock-bars>div{display:grid;grid-template-columns:75px minmax(0,1fr) 24px;align-items:center;gap:8px;color:#47635c;font-size:10px}
+.stock-bars>div>b{color:#1c4b39;text-align:right}
+.stock-track{height:10px;overflow:hidden;border-radius:20px;background:#e5eee8}
+.stock-track i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#5bd479,#119348);transition:width .35s}
+.stock-track-orange i{background:linear-gradient(90deg,#ffc56a,#e98325)}
+.dashboard-action{display:flex;align-items:center;gap:12px;min-height:65px;padding:10px 4px;border-bottom:1px solid #e9efed;color:#234d42;text-decoration:none}
+.dashboard-action:last-child{border-bottom:0}
+.dashboard-action>span{display:grid;width:38px;height:38px;flex:none;place-items:center;border-radius:10px;background:#e9f7ed;color:#0a8a4a;font-size:22px;font-weight:800}
+.dashboard-action>div{display:grid;gap:4px;flex:1}
+.dashboard-action b{font-size:11px}
+.dashboard-action small{color:#73847e;font-size:9px}
+.dashboard-action strong{color:#14884a;font-size:17px}
+@media(max-width:1050px){.admin-dashboard-panels,.admin-dashboard-bottom{grid-template-columns:1fr 1fr}.security-checks{grid-template-columns:repeat(2,minmax(0,1fr))}.security-checks>div:nth-child(2){border-right:0}.security-checks>div:nth-child(-n+2){border-bottom:1px solid #d7e7df}}
+@media(max-width:760px){.admin-dashboard-panels,.admin-dashboard-bottom{grid-template-columns:1fr;gap:11px}.admin-dashboard-hero{min-height:150px;margin-right:-13px;margin-left:-13px;border-radius:0}.dashboard-panel{padding:14px}.admin-dashboard-bottom .admin-recent-panel{min-height:0}.stock-overview{grid-template-columns:100px minmax(0,1fr);gap:12px;padding:10px}}
+@media(max-width:440px){.admin-dashboard-hero .admin-hero-motto{display:none}.admin-dashboard-hero h1{font-size:25px}.admin-dashboard-hero h2{font-size:16px}.dashboard-panel-heading h2{font-size:14px}.admin-earnings-panel .dashboard-panel-heading{display:grid}.admin-earnings-panel .admin-filter-form{justify-content:flex-start}.admin-earnings-panel .admin-filter-form input{min-width:0;width:100%}.admin-earnings-metric b{font-size:14px}.stock-overview{grid-template-columns:1fr}.stock-total{grid-template-columns:auto 1fr;justify-items:start;gap:10px;padding:10px 14px}.stock-total b{font-size:26px}.stock-total span{text-align:left}}
 .admin-sales-grid>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:12px;background:#fff;box-shadow:0 8px 24px #19395708}
 .admin-sales-grid .admin-section-heading h2{font-size:17px}
 .admin-sales-entry form{gap:8px}
