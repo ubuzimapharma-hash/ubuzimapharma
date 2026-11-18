@@ -569,7 +569,7 @@ async function loadAdminEarnings() {
     ["Fixed expense allocation", value("fixed_expense_allocation_bif", "fixed_expense_bif", "fixed_cost_allocation_bif", "fixed_expenses_bif")],
     ["Estimated earnings", value("estimated_earnings_bif", "earnings_bif")]
   ];
-  target.innerHTML = `<div class="admin-summary-grid">${labels.map(([label, amount]) => `<article class="admin-summary-card"><b>${label}</b><span class="summary-number">${escapeHtml(formatCurrency(amount))}</span></article>`).join("")}</div>
+  target.innerHTML = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div>
     <h3>Sale records</h3>${sales.length ? `<div class="admin-list">${sales.map(sale => {
       const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.image;
       const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";

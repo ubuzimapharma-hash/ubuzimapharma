@@ -513,6 +513,34 @@
 .admin-page-content{margin-top:0}
 .admin-dashboard>.admin-team-grid.admin-page-content,.admin-dashboard>.admin-products-grid.admin-page-content,.admin-dashboard>.admin-news-grid.admin-page-content{margin-bottom:0}
 .admin-page-content>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:9px;background:#fff}
+.admin-sales-grid{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.5fr);align-items:start;gap:16px;margin:0 0 18px}
+.admin-sales-grid>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:12px;background:#fff;box-shadow:0 8px 24px #19395708}
+.admin-sales-grid .admin-section-heading h2{font-size:17px}
+.admin-sales-entry form{gap:8px}
+.admin-sales-entry .form-help{margin:0;color:#687e89;font-size:11px;line-height:1.5}
+.admin-sales-entry [role="status"]{padding:10px 12px;border-radius:8px;background:#edf8f1;color:#177447;font-weight:700}
+.admin-sales-entry [role="status"].status-error{background:#fff0ef;color:#ad3934}
+.admin-earnings-panel{display:grid;gap:12px}
+.admin-earnings-panel .admin-section-heading{margin:0}
+.admin-earnings-panel h3{margin:4px 0;color:#19495e;font:800 14px Manrope,sans-serif}
+.admin-filter-form{display:flex;align-items:end;gap:9px;flex-wrap:wrap;padding:12px;border:1px solid #e8eeef;border-radius:9px;background:#f8fbfa}
+.admin-earnings-panel .admin-filter-form{display:flex}
+.admin-filter-form label{display:grid;gap:5px;margin:0;color:#526c79;font-size:10px;font-weight:700}
+.admin-filter-form input{min-width:145px;padding:8px 10px;border:1px solid #dce5e7;border-radius:7px;background:#fff;color:#183e4b;font:12px "DM Sans",sans-serif}
+.admin-earnings-panel .admin-filter-form input{min-width:145px;padding:8px 10px;font-size:12px}
+.admin-filter-form .btn{min-height:36px;padding:8px 12px;font-size:11px}
+.admin-earnings-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.admin-earnings-metric{display:grid;gap:7px;min-width:0;padding:13px;border:1px solid #e5edf1;border-radius:9px;background:#f7fafb}
+.admin-earnings-metric span{color:#607783;font-size:10px;font-weight:700}
+.admin-earnings-metric b{overflow-wrap:anywhere;color:#124c63;font:800 clamp(15px,1.6vw,20px) Manrope,sans-serif}
+.admin-earnings-panel .admin-list{max-height:330px;overflow:auto}
+.admin-earnings-panel .admin-list-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.admin-earnings-panel .admin-list-item small{flex:1}
+.admin-earnings-panel .admin-list-item a{color:#087b5b;font-size:11px;font-weight:700}
+.pharmacist-aside .admin-sales-entry{min-width:0}
+@media(max-width:1050px){.admin-sales-grid{grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr)}.pharmacist-aside .admin-sales-entry{grid-column:1/-1}}
+@media(max-width:760px){.admin-sales-grid{grid-template-columns:1fr;gap:12px}.admin-sales-grid>.manager-panel{padding:16px}.admin-earnings-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-earnings-panel .admin-filter-form input{min-width:0;width:100%}.admin-filter-form label{flex:1 1 135px}}
+@media(max-width:420px){.admin-earnings-metrics{grid-template-columns:1fr}.admin-filter-form .btn{width:100%}}
 .admin-page-content .admin-list{gap:9px}
 @media(max-width:760px){.admin-quick-panel>a{min-height:45px}}
 @media(max-width:440px){.admin-topbar{gap:9px;padding:0 10px}.admin-topbar-identity{gap:7px}.admin-mail-icon{font-size:16px}.admin-topbar-identity b,.admin-topbar-identity span{font-size:9px}.admin-topbar-profile>span{width:30px;height:30px}.admin-hero{min-height:128px;padding:15px}.admin-hero h1{max-width:245px;font-size:19px}.admin-hero h2{font-size:14px}.admin-hero p{max-width:250px;font-size:10px}.admin-hero-motto{font-size:13px}.admin-summary-card{grid-template-columns:37px 1fr 15px;padding:8px;column-gap:7px}.summary-icon{width:34px;height:34px;font-size:18px}.summary-number{font-size:20px}.admin-summary-card>b{font-size:9px}.admin-summary-card>small{font-size:8px}.admin-safety-panel{padding:12px 9px}.admin-safety-panel li{font-size:8px}.admin-promo-card>span{font-size:10px}.admin-footer{gap:8px;font-size:8px}}

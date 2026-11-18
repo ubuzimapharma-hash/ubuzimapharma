@@ -75,19 +75,6 @@
           <a class="btn btn-outline" href="/pharmacist/videos?compose=1">＋ Shiramwo video nshasha</a>
         </div>
 
-        <section class="pharmacist-panel manager-panel" aria-labelledby="pharmacistSalesTitle">
-          <div class="admin-section-heading"><div><span class="section-kicker">UGURISHA RYA NONE</span><h2 id="pharmacistSalesTitle">Andika igurisha</h2></div></div>
-          <form id="staffSalesForm" enctype="multipart/form-data">
-            <label for="saleAmount">Amafaranga yagurishijwe (BIF)</label>
-            <input id="saleAmount" name="amount_bif" type="number" min="1" max="999999999999" step="1" inputmode="numeric" required>
-            <label for="saleImage">Ifoto y'igurisha</label>
-            <input id="saleImage" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
-            <small class="form-help">JPEG, PNG canke WebP; ntirenge 5 MB.</small>
-            <div class="manager-form-actions"><button class="btn btn-primary" type="submit">Bika igurisha</button></div>
-            <p class="form-help" id="staffSalesStatus" role="status" aria-live="polite" hidden></p>
-          </form>
-        </section>
-
         <div class="pharmacist-content-grid">
           <div class="pharmacist-main-panel">
             <section class="pharmacist-panel manager-panel" id="pharmacistPanelInventory">
@@ -122,6 +109,18 @@
             </section>
           </div>
           <aside class="pharmacist-aside">
+            <section class="admin-sales-entry pharmacist-panel manager-panel" aria-labelledby="pharmacistSalesTitle">
+              <div class="admin-section-heading"><div><span class="section-kicker">UGURISHA RYA NONE</span><h2 id="pharmacistSalesTitle">Andika igurisha</h2></div></div>
+              <form id="staffSalesForm" enctype="multipart/form-data">
+                <label for="saleAmount">Amafaranga yagurishijwe (BIF)</label>
+                <input id="saleAmount" name="amount_bif" type="number" min="1" max="999999999999" step="1" inputmode="numeric" required>
+                <label for="saleImage">Ifoto y'igurisha</label>
+                <input id="saleImage" name="image" type="file" accept="image/jpeg,image/png,image/webp" required>
+                <small class="form-help">JPEG, PNG canke WebP; ntirenge 5 MB.</small>
+                <div class="manager-form-actions"><button class="btn btn-primary" type="submit">Bika igurisha</button></div>
+                <p class="form-help" id="staffSalesStatus" role="status" aria-live="polite" hidden></p>
+              </form>
+            </section>
             <section class="admin-quick-panel"><h2><span>▦</span>IBIKORWA VYAWE</h2><a href="index.html#pharmacistPanelInventory"><i class="quick-icon quick-blue">◇</i><span>Imiti n'ububiko</span><strong>›</strong></a><a href="/pharmacist/news"><i class="quick-icon quick-green">▤</i><span>Amakuru</span><strong>›</strong></a><a href="/pharmacist/videos"><i class="quick-icon quick-orange">▷</i><span>Video</span><strong>›</strong></a><a href="index.html#pharmacistPanelActivity"><i class="quick-icon quick-blue">◷</i><span>Amateka y'ihindurwa</span><strong>›</strong></a></section>
             <section class="admin-safety-panel"><h2><span>⬟</span>Umwete mu bubiko</h2><ul><li>Raba ibitigiri vy'imiti kenshi</li><li>Hisha imiti itagishobora kugurishwa</li><li>Genzura ko igiciro n'ifoto ari vyo</li></ul></section>
             <a class="admin-promo-card" href="../contact.html"><img src="../assets/pharmacy-consultation.png" alt=""><span>Gufasha abakiriya, ni igikorwa cacu.<b>✚</b></span></a>
