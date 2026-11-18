@@ -89,6 +89,17 @@ function setStatus(message, isError = false) {
   });
 }
 
+function formatBurundiDateTime(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return String(value);
+  return new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Africa/Bujumbura"
+  }).format(date);
+}
+
 async function fetchProducts(path = "/api/products") {
   const result = await apiRequest(path);
   if (!Array.isArray(result)) throw new Error("API ntiyagaruye urutonde rw'imiti rwemewe.");
@@ -502,6 +513,16 @@ async function reloadStaffData() {
 function setupStaffSalesForm() {
   const form = $("#staffSalesForm");
   if (!form) return;
+  const imageInput = $("#saleImage");
+  const imageSelection = $("#saleImageSelection");
+  form.querySelectorAll("[data-sale-photo-mode]").forEach(button => button.addEventListener("click", () => {
+    if (button.dataset.salePhotoMode === "camera") imageInput.setAttribute("capture", "environment");
+    else imageInput.removeAttribute("capture");
+    imageInput.click();
+  }));
+  imageInput.addEventListener("change", () => {
+    if (imageSelection) imageSelection.textContent = imageInput.files[0]?.name || "No photo selected.";
+  });
   form.addEventListener("submit", async event => {
     event.preventDefault();
     const file = $("#saleImage").files[0];
@@ -517,9 +538,12 @@ function setupStaffSalesForm() {
     const button = form.querySelector('[type="submit"]');
     button.disabled = true;
     try {
-      await adminRequest("/api/staff/sales", { method: "POST", body: new FormData(form) });
+      const result = await adminRequest("/api/staff/sales", { method: "POST", body: new FormData(form) });
       form.reset();
-      status.textContent = "Sale recorded";
+      if (imageSelection) imageSelection.textContent = "No photo selected.";
+      const sale = result?.sale || result?.record || result?.sale_record || result;
+      const recordedAt = sale?.created_at || sale?.recorded_at || sale?.sold_at || sale?.timestamp;
+      status.textContent = recordedAt ? `Sale recorded · ${formatBurundiDateTime(recordedAt)} (Burundi time)` : "Sale recorded";
       status.hidden = false;
       setStatus("Sale recorded");
       if (document.body.dataset.staffRole === "admin") {
@@ -574,7 +598,9 @@ async function loadAdminEarnings() {
   const recordsHtml = `${sales.length ? `<div class="admin-list">${sales.map(sale => {
       const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.private_photo_link || sale.photo || sale.image;
       const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";
-      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(sale.created_at || sale.recorded_at || sale.date || "")}</small>${photoLink}</article>`;
+      const recordedAt = sale.created_at || sale.recorded_at || sale.sold_at || sale.timestamp || sale.date;
+      const dateTime = formatBurundiDateTime(recordedAt);
+      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(dateTime || "Recorded time unavailable")}${dateTime ? " · Burundi time" : ""}</small>${photoLink}</article>`;
     }).join("")}</div>` : '<p class="empty-state">No sale records for this period.</p>'}`;
   target.innerHTML = metricsHtml;
   const records = $("#adminEarningsRecords");

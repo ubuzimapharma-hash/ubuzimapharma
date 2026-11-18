@@ -586,6 +586,11 @@
 .admin-sales-grid>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:12px;background:#fff;box-shadow:0 8px 24px #19395708}
 .admin-sales-grid .admin-section-heading h2{font-size:17px}
 .admin-sales-entry form{gap:8px}
+.sales-image-choices{display:flex;gap:8px;flex-wrap:wrap}
+.sales-image-label{margin-top:8px;color:#425870;font-size:12px;font-weight:800}
+.sales-image-choices .btn{min-height:38px}
+.sales-photo-input{position:absolute;width:1px;height:1px;padding:0!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;clip-path:inset(50%)}
+.sales-image-choices+.sales-photo-input+.form-help{margin:0;color:#687e89;font-size:10px;overflow-wrap:anywhere}
 .admin-sales-entry .form-help{margin:0;color:#687e89;font-size:11px;line-height:1.5}
 .admin-sales-entry [role="status"]{padding:10px 12px;border-radius:8px;background:#edf8f1;color:#177447;font-weight:700}
 .admin-sales-entry [role="status"].status-error{background:#fff0ef;color:#ad3934}
