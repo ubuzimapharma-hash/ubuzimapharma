@@ -514,7 +514,7 @@
 .admin-dashboard>.admin-team-grid.admin-page-content,.admin-dashboard>.admin-products-grid.admin-page-content,.admin-dashboard>.admin-news-grid.admin-page-content{margin-bottom:0}
 .admin-page-content>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:9px;background:#fff}
 .admin-sales-grid{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.5fr);align-items:stretch;gap:16px;margin:0 0 18px}
-body[data-staff-role="admin"] .admin-sales-grid{grid-template-rows:minmax(0,1fr);height:clamp(520px,68vh,650px)}
+body[data-staff-role="admin"] .admin-sales-grid{grid-template-rows:minmax(0,1fr);column-gap:24px;height:clamp(520px,68vh,650px)}
 .admin-dashboard-hero{min-height:175px;border-radius:15px;background:#e6f4ed}
 .admin-dashboard-hero:before{background:linear-gradient(90deg,#effaf4 0%,#ebf8f0ed 42%,#e7f5ed66 73%,#eaf8ef70 100%),url("assets/pharmacy-consultation.png") center 42%/cover no-repeat}
 .admin-dashboard-hero .admin-hero-kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:9px;padding:7px 12px;border-radius:30px;background:#c9f3d4;color:#06743e;font-size:11px;letter-spacing:0}
@@ -1236,3 +1236,9 @@ body[data-staff-role="admin"] .admin-sales-grid>.manager-panel{min-height:0;heig
 .sales-photo-dialog-content>[role="status"]{margin:0}
 .sales-photo-dialog-content img{display:block;max-width:100%;max-height:min(78vh,820px);margin:auto;object-fit:contain;border-radius:10px;background:#f5f8f8}
 .sales-photo-dialog-content img[hidden]{display:none}
+
+.admin-earnings-panel .admin-filter-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;align-items:end;gap:14px}
+.admin-earnings-panel .admin-filter-form label{min-width:0}
+.admin-earnings-panel .admin-filter-form input{display:block;width:100%;min-width:0;box-sizing:border-box}
+@media(max-width:760px){.admin-earnings-panel .admin-filter-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.admin-earnings-panel .admin-filter-form button{grid-column:1/-1;width:fit-content}}
+@media(max-width:420px){.admin-earnings-panel .admin-filter-form{grid-template-columns:minmax(0,1fr)}.admin-earnings-panel .admin-filter-form button{grid-column:auto;width:100%}}
