@@ -644,6 +644,61 @@ function showAdminEarningsError(error) {
   if (target) target.innerHTML = `<p class="status-error" role="alert">${escapeHtml(error.message)}</p>`;
 }
 
+function ensureSalesPhotoDialog() {
+  let dialog = $("#salesPhotoDialog");
+  if (dialog) return dialog;
+  dialog = document.createElement("dialog");
+  dialog.id = "salesPhotoDialog";
+  dialog.className = "admin-sales-photo-dialog";
+  dialog.setAttribute("aria-labelledby", "salesPhotoDialogTitle");
+  dialog.innerHTML = `<div class="sales-photo-dialog-content"><header><h2 id="salesPhotoDialogTitle">Sale photo</h2><button class="sales-photo-dialog-close" type="button" aria-label="Close photo viewer">Close</button></header><p class="form-help" role="status">Loading sale photo...</p><img alt="Sale receipt photo" hidden></div>`;
+  document.body.append(dialog);
+  dialog.querySelector(".sales-photo-dialog-close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener("close", () => {
+    const image = dialog.querySelector("img");
+    if (image.dataset.objectUrl) URL.revokeObjectURL(image.dataset.objectUrl);
+    delete image.dataset.objectUrl;
+    image.removeAttribute("src");
+    image.hidden = true;
+  });
+  return dialog;
+}
+
+async function openSalesPhoto(url, button) {
+  const dialog = ensureSalesPhotoDialog();
+  const status = dialog.querySelector('[role="status"]');
+  const image = dialog.querySelector("img");
+  if (image.dataset.objectUrl) URL.revokeObjectURL(image.dataset.objectUrl);
+  delete image.dataset.objectUrl;
+  image.removeAttribute("src");
+  image.hidden = true;
+  status.textContent = "Loading sale photo...";
+  status.hidden = false;
+  if (!dialog.open) dialog.showModal();
+  button.disabled = true;
+  try {
+    const response = await fetch(url, { credentials: "include" });
+    if (!response.ok) {
+      let message = "Could not load the sale photo.";
+      try { message = (await response.json()).error || message; } catch {}
+      throw new Error(message);
+    }
+    const photo = await response.blob();
+    if (!photo.type.startsWith("image/")) throw new Error("The sale photo response was not an image.");
+    const objectUrl = URL.createObjectURL(photo);
+    image.dataset.objectUrl = objectUrl;
+    image.src = objectUrl;
+    image.hidden = false;
+    status.hidden = true;
+  } catch (error) {
+    status.textContent = error.message;
+    status.classList.add("status-error");
+  } finally {
+    button.disabled = false;
+  }
+}
+
 async function loadAdminEarnings() {
   const target = $("#adminEarningsReport");
   if (!target || document.body.dataset.staffRole !== "admin") return;
@@ -672,7 +727,7 @@ async function loadAdminEarnings() {
   const metricsHtml = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div><p class="form-help">Fixed monthly costs: ${escapeHtml(formatCurrency(500000))} (200,000 salary + 300,000 rent). Daily allocation uses a 30-day month.</p>`;
   const recordsHtml = `${sales.length ? `<div class="admin-list">${sales.map(sale => {
       const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.private_photo_link || sale.photo || sale.image;
-      const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";
+      const photoLink = photo ? `<button class="btn btn-outline sale-photo-open" type="button" data-sale-photo-url="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}">View photo</button>` : "";
       const recordedAt = sale.created_at || sale.recorded_at || sale.sold_at || sale.timestamp;
       const dateTime = formatBurundiDateTime(recordedAt);
       const saleDate = formatSaleDate(sale.sale_date);
@@ -684,6 +739,7 @@ async function loadAdminEarnings() {
   if (records) {
     records.innerHTML = recordsHtml;
     records.querySelectorAll("[data-delete-sale]").forEach(button => button.addEventListener("click", () => deleteStaffSale(button.dataset.deleteSale)));
+    records.querySelectorAll("[data-sale-photo-url]").forEach(button => button.addEventListener("click", () => openSalesPhoto(button.dataset.salePhotoUrl, button)));
   }
 }
 
