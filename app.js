@@ -561,6 +561,7 @@ function setupStaffSalesForm() {
       status.textContent = `${saleDate ? `Sale recorded for ${formatSaleDate(saleDate)}. ` : "Sale recorded. "}${recordedAt ? `Recorded ${formatBurundiDateTime(recordedAt)} (Burundi time)` : ""}`.trim();
       status.hidden = false;
       setStatus("Sale recorded");
+      await loadStaffSalesRecords().catch(error => console.error("Could not refresh sale records.", error));
       if (document.body.dataset.staffRole === "admin") {
         const earningsFilter = $("#adminEarningsFilter");
         if (earningsFilter && selectedSaleDate) {
@@ -579,9 +580,43 @@ function setupStaffSalesForm() {
   });
 }
 
+async function loadStaffSalesRecords() {
+  const target = $("#staffSalesRecords");
+  if (!target || document.body.dataset.staffRole !== "pharmacist") return;
+  const sales = await adminRequest("/api/staff/sales");
+  target.innerHTML = sales.length ? sales.map(sale => `
+    <article class="admin-list-item">
+      <b>${escapeHtml(formatCurrency(sale.amount_bif))}</b>
+      <small>${escapeHtml(formatSaleDate(sale.sale_date))} · ${escapeHtml(formatBurundiDateTime(sale.created_at))} (Burundi time)</small>
+      <button class="btn btn-outline" type="button" data-delete-sale="${escapeHtml(sale.id)}">Delete</button>
+    </article>
+  `).join("") : '<p class="empty-state">No sales recorded yet.</p>';
+  target.querySelectorAll("[data-delete-sale]").forEach(button => button.addEventListener("click", () => deleteStaffSale(button.dataset.deleteSale)));
+}
+
+async function deleteStaffSale(id) {
+  if (!confirm("Delete this sale entry? This will update the admin earnings report.")) return;
+  try {
+    await adminRequest(`/api/staff/sales/${encodeURIComponent(id)}`, { method: "DELETE" });
+    await loadStaffSalesRecords();
+    if (document.body.dataset.staffRole === "admin") await loadAdminEarnings();
+    setStatus("Sale entry deleted.");
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+}
+
 function setupAdminEarnings() {
   const form = $("#adminEarningsFilter");
   if (!form) return;
+  const dateParts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Africa/Bujumbura", year: "numeric", month: "2-digit", day: "2-digit"
+  }).formatToParts(new Date()).filter(part => part.type !== "literal").map(part => [part.type, part.value]));
+  const today = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+  const from = form.querySelector('[name="from"]');
+  const to = form.querySelector('[name="to"]');
+  if (from && !from.value) from.value = `${dateParts.year}-01-01`;
+  if (to && !to.value) to.value = today;
   form.addEventListener("submit", event => {
     event.preventDefault();
     loadAdminEarnings().catch(error => showAdminEarningsError(error));
@@ -602,8 +637,12 @@ async function loadAdminEarnings() {
   if (form?.querySelector('[name="to"]').value) params.set("to", form.querySelector('[name="to"]').value);
   const query = params.size ? `?${params}` : "";
   const report = await adminRequest(`/api/admin/earnings${query}`);
+  const totals = report.totals || report;
   const value = (...keys) => {
-    for (const key of keys) if (report[key] !== undefined) return report[key];
+    for (const key of keys) {
+      if (totals[key] !== undefined) return totals[key];
+      if (report[key] !== undefined) return report[key];
+    }
     return 0;
   };
   const sales = report.sales || report.sale_records || report.records || [];
@@ -622,11 +661,14 @@ async function loadAdminEarnings() {
       const dateTime = formatBurundiDateTime(recordedAt);
       const saleDate = formatSaleDate(sale.sale_date);
       const details = [saleDate && `Sale date: ${saleDate}`, dateTime && `Recorded: ${dateTime} (Burundi time)`].filter(Boolean).join(" | ");
-      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(details || "Sale date and recorded time unavailable")}</small>${photoLink}</article>`;
+      return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(details || "Sale date and recorded time unavailable")}</small>${photoLink}<button class="btn btn-outline" type="button" data-delete-sale="${escapeHtml(sale.id)}">Delete</button></article>`;
     }).join("")}</div>` : '<p class="empty-state">No sale records for this period.</p>'}`;
   target.innerHTML = metricsHtml;
   const records = $("#adminEarningsRecords");
-  if (records) records.innerHTML = recordsHtml;
+  if (records) {
+    records.innerHTML = recordsHtml;
+    records.querySelectorAll("[data-delete-sale]").forEach(button => button.addEventListener("click", () => deleteStaffSale(button.dataset.deleteSale)));
+  }
 }
 
 function updatePharmacistSummary() {
@@ -822,6 +864,7 @@ async function loadStaffSession() {
   showStaffDashboard(staff);
   try {
     await reloadStaffData();
+    await loadStaffSalesRecords();
     focusRequestedContentForm();
   } catch (error) {
     console.error("Could not load staff dashboard data.", error);

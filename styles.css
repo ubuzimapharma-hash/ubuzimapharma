@@ -513,7 +513,8 @@
 .admin-page-content{margin-top:0}
 .admin-dashboard>.admin-team-grid.admin-page-content,.admin-dashboard>.admin-products-grid.admin-page-content,.admin-dashboard>.admin-news-grid.admin-page-content{margin-bottom:0}
 .admin-page-content>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:9px;background:#fff}
-.admin-sales-grid{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.5fr);align-items:start;gap:16px;margin:0 0 18px}
+.admin-sales-grid{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.5fr);align-items:stretch;gap:16px;margin:0 0 18px}
+body[data-staff-role="admin"] .admin-sales-grid{grid-template-rows:minmax(0,1fr);height:clamp(520px,68vh,650px)}
 .admin-dashboard-hero{min-height:175px;border-radius:15px;background:#e6f4ed}
 .admin-dashboard-hero:before{background:linear-gradient(90deg,#effaf4 0%,#ebf8f0ed 42%,#e7f5ed66 73%,#eaf8ef70 100%),url("assets/pharmacy-consultation.png") center 42%/cover no-repeat}
 .admin-dashboard-hero .admin-hero-kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:9px;padding:7px 12px;border-radius:30px;background:#c9f3d4;color:#06743e;font-size:11px;letter-spacing:0}
@@ -584,6 +585,7 @@
 @media(max-width:760px){.admin-dashboard-panels,.admin-dashboard-bottom{grid-template-columns:1fr;gap:11px}.admin-dashboard-hero{min-height:150px;margin-right:-13px;margin-left:-13px;border-radius:0}.dashboard-panel{padding:14px}.admin-dashboard-bottom .admin-recent-panel{min-height:0}.stock-overview{grid-template-columns:100px minmax(0,1fr);gap:12px;padding:10px}}
 @media(max-width:440px){.admin-dashboard-hero .admin-hero-motto{display:none}.admin-dashboard-hero h1{font-size:25px}.admin-dashboard-hero h2{font-size:16px}.dashboard-panel-heading h2{font-size:14px}.admin-earnings-panel .dashboard-panel-heading{display:grid}.admin-earnings-panel .admin-filter-form{justify-content:flex-start}.admin-earnings-panel .admin-filter-form input{min-width:0;width:100%}.admin-earnings-metric b{font-size:14px}.stock-overview{grid-template-columns:1fr}.stock-total{grid-template-columns:auto 1fr;justify-items:start;gap:10px;padding:10px 14px}.stock-total b{font-size:26px}.stock-total span{text-align:left}}
 .admin-sales-grid>.manager-panel{min-width:0;padding:20px;border:1px solid #e5edf1;border-radius:12px;background:#fff;box-shadow:0 8px 24px #19395708}
+body[data-staff-role="admin"] .admin-sales-grid>.manager-panel{min-height:0;height:100%;overflow-y:auto;box-sizing:border-box}
 .admin-sales-grid .admin-section-heading h2{font-size:17px}
 .admin-sales-entry form{gap:8px}
 .sales-image-choices{display:flex;gap:8px;flex-wrap:wrap}
@@ -594,7 +596,7 @@
 .admin-sales-entry .form-help{margin:0;color:#687e89;font-size:11px;line-height:1.5}
 .admin-sales-entry [role="status"]{padding:10px 12px;border-radius:8px;background:#edf8f1;color:#177447;font-weight:700}
 .admin-sales-entry [role="status"].status-error{background:#fff0ef;color:#ad3934}
-.admin-earnings-panel{display:grid;gap:12px}
+.admin-earnings-panel{display:grid;align-content:start;gap:12px}
 .admin-earnings-panel .admin-section-heading{margin:0}
 .admin-earnings-panel h3{margin:4px 0;color:#19495e;font:800 14px Manrope,sans-serif}
 .admin-filter-form{display:flex;align-items:end;gap:9px;flex-wrap:wrap;padding:12px;border:1px solid #e8eeef;border-radius:9px;background:#f8fbfa}
@@ -607,13 +609,13 @@
 .admin-earnings-metric{display:grid;gap:7px;min-width:0;padding:13px;border:1px solid #e5edf1;border-radius:9px;background:#f7fafb}
 .admin-earnings-metric span{color:#607783;font-size:10px;font-weight:700}
 .admin-earnings-metric b{overflow-wrap:anywhere;color:#124c63;font:800 clamp(15px,1.6vw,20px) Manrope,sans-serif}
-.admin-earnings-panel .admin-list{max-height:330px;overflow:auto}
+.admin-earnings-panel .admin-list{min-width:0}
 .admin-earnings-panel .admin-list-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .admin-earnings-panel .admin-list-item small{flex:1}
 .admin-earnings-panel .admin-list-item a{color:#087b5b;font-size:11px;font-weight:700}
 .pharmacist-aside .admin-sales-entry{min-width:0}
 @media(max-width:1050px){.admin-sales-grid{grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr)}.pharmacist-aside .admin-sales-entry{grid-column:1/-1}}
-@media(max-width:760px){.admin-sales-grid{grid-template-columns:1fr;gap:12px}.admin-sales-grid>.manager-panel{padding:16px}.admin-earnings-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-earnings-panel .admin-filter-form input{min-width:0;width:100%}.admin-filter-form label{flex:1 1 135px}}
+@media(max-width:760px){.admin-sales-grid{grid-template-columns:1fr;gap:12px}body[data-staff-role="admin"] .admin-sales-grid{grid-template-rows:repeat(2,minmax(0,1fr));height:clamp(680px,100vh,900px)}.admin-sales-grid>.manager-panel{padding:16px}.admin-earnings-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-earnings-panel .admin-filter-form input{min-width:0;width:100%}.admin-filter-form label{flex:1 1 135px}}
 @media(max-width:420px){.admin-earnings-metrics{grid-template-columns:1fr}.admin-filter-form .btn{width:100%}}
 .admin-page-content .admin-list{gap:9px}
 @media(max-width:760px){.admin-quick-panel>a{min-height:45px}}
