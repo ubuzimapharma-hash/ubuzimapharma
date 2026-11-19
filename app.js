@@ -567,6 +567,7 @@ function setupStaffSalesForm() {
         if (earningsFilter && selectedSaleDate) {
           earningsFilter.elements.from.value = selectedSaleDate;
           earningsFilter.elements.to.value = selectedSaleDate;
+          rememberAdminEarningsRange();
         }
         try { await loadAdminEarnings(); } catch (error) { showAdminEarningsError(error); }
       }
@@ -606,6 +607,18 @@ async function deleteStaffSale(id) {
   }
 }
 
+function rememberAdminEarningsRange() {
+  const form = $("#adminEarningsFilter");
+  if (!form) return;
+  const url = new URL(window.location.href);
+  for (const key of ["from", "to"]) {
+    const value = form.elements[key]?.value;
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  }
+  window.history.replaceState(null, "", url);
+}
+
 function setupAdminEarnings() {
   const form = $("#adminEarningsFilter");
   if (!form) return;
@@ -615,10 +628,13 @@ function setupAdminEarnings() {
   const today = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
   const from = form.querySelector('[name="from"]');
   const to = form.querySelector('[name="to"]');
-  if (from && !from.value) from.value = `${dateParts.year}-01-01`;
+  const savedRange = new URLSearchParams(window.location.search);
+  if (from && !from.value) from.value = savedRange.get("from") || today;
+  if (to && !to.value) to.value = savedRange.get("to") || today;
   if (to && !to.value) to.value = today;
   form.addEventListener("submit", event => {
     event.preventDefault();
+    rememberAdminEarningsRange();
     loadAdminEarnings().catch(error => showAdminEarningsError(error));
   });
 }
@@ -649,11 +665,11 @@ async function loadAdminEarnings() {
   renderAdminSalesChart(sales);
   const labels = [
     ["Daily sales", value("daily_sales_bif", "total_sales_bif", "sales_bif")],
-    ["Estimated gross profit", value("estimated_gross_profit_bif", "gross_profit_bif")],
-    ["Fixed expense allocation", value("fixed_expense_allocation_bif", "fixed_expense_bif", "fixed_cost_allocation_bif", "fixed_expenses_bif")],
-    ["Estimated earnings", value("estimated_earnings_bif", "earnings_bif")]
+    ["Gross profit (1.5x markup)", value("gross_profit_bif")],
+    ["Fixed costs for selected days", value("fixed_expense_allocation_bif", "fixed_expense_bif", "fixed_cost_allocation_bif", "fixed_expenses_bif")],
+    ["Earnings after fixed costs", value("earnings_bif")]
   ];
-  const metricsHtml = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div>`;
+  const metricsHtml = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div><p class="form-help">Fixed monthly costs: ${escapeHtml(formatCurrency(500000))} (200,000 salary + 300,000 rent). Daily allocation uses a 30-day month.</p>`;
   const recordsHtml = `${sales.length ? `<div class="admin-list">${sales.map(sale => {
       const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.private_photo_link || sale.photo || sale.image;
       const photoLink = photo ? `<a href="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}" target="_blank" rel="noopener">View private photo</a>` : "";
