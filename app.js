@@ -707,7 +707,11 @@ async function loadAdminEarnings() {
   if (form?.querySelector('[name="from"]').value) params.set("from", form.querySelector('[name="from"]').value);
   if (form?.querySelector('[name="to"]').value) params.set("to", form.querySelector('[name="to"]').value);
   const query = params.size ? `?${params}` : "";
-  const report = await adminRequest(`/api/admin/earnings${query}`);
+  const [report, savedSales, historySummary] = await Promise.all([
+    adminRequest(`/api/admin/earnings${query}`),
+    adminRequest("/api/staff/sales"),
+    adminRequest("/api/admin/earnings/summary")
+  ]);
   const totals = report.totals || report;
   const value = (...keys) => {
     for (const key of keys) {
@@ -725,16 +729,18 @@ async function loadAdminEarnings() {
     ["Earnings after fixed costs", value("earnings_bif")]
   ];
   const metricsHtml = `<div class="admin-earnings-metrics">${labels.map(([label, amount]) => `<article class="admin-earnings-metric"><span>${label}</span><b>${escapeHtml(formatCurrency(amount))}</b></article>`).join("")}</div><p class="form-help">Fixed monthly costs: ${escapeHtml(formatCurrency(500000))} (200,000 salary + 300,000 rent). Daily allocation uses a 30-day month.</p>`;
-  const recordsHtml = `${sales.length ? `<div class="admin-list">${sales.map(sale => {
+  const recordsHtml = `${savedSales.length ? `<div class="admin-list">${savedSales.map(sale => {
       const photo = sale.photo_url || sale.image_url || sale.photo_link || sale.private_photo_url || sale.private_photo_link || sale.photo || sale.image;
-      const photoLink = photo ? `<button class="btn btn-outline sale-photo-open" type="button" data-sale-photo-url="${escapeHtml(new URL(photo, apiBaseUrl || window.location.href).href)}">View photo</button>` : "";
+      const photoUrl = photo || (sale.id ? `/api/admin/earnings/${encodeURIComponent(sale.id)}/image` : "");
+      const photoLink = photoUrl ? `<button class="btn btn-outline sale-photo-open" type="button" data-sale-photo-url="${escapeHtml(new URL(photoUrl, apiBaseUrl || window.location.href).href)}">View photo</button>` : "";
       const recordedAt = sale.created_at || sale.recorded_at || sale.sold_at || sale.timestamp;
       const dateTime = formatBurundiDateTime(recordedAt);
       const saleDate = formatSaleDate(sale.sale_date);
       const details = [saleDate && `Sale date: ${saleDate}`, dateTime && `Recorded: ${dateTime} (Burundi time)`].filter(Boolean).join(" | ");
       return `<article class="admin-list-item"><b>${escapeHtml(formatCurrency(sale.amount_bif ?? sale.amount ?? 0))}</b><small>${escapeHtml(details || "Sale date and recorded time unavailable")}</small>${photoLink}<button class="btn btn-outline" type="button" data-delete-sale="${escapeHtml(sale.id)}">Delete</button></article>`;
-    }).join("")}</div>` : '<p class="empty-state">No sale records for this period.</p>'}`;
+    }).join("")}</div>` : '<p class="empty-state">No saved sales yet.</p>'}`;
   target.innerHTML = metricsHtml;
+  renderAdminEarningsHistory(historySummary);
   const records = $("#adminEarningsRecords");
   if (records) {
     records.innerHTML = recordsHtml;
@@ -743,6 +749,25 @@ async function loadAdminEarnings() {
   }
 }
 
+function renderAdminEarningsHistory(summary) {
+  const target = $("#adminEarningsHistory");
+  if (!target) return;
+  const allTime = summary.all_time || { sales_bif: 0, gross_profit_bif: 0 };
+  const months = summary.months || [];
+  const buttons = [{ key: "all-time", label: "From day one", ...allTime }, ...months.map(month => ({
+    key: month.month,
+    label: new Intl.DateTimeFormat("en", { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${month.month}-01T00:00:00Z`)),
+    ...month
+  }))];
+  const selectedKey = target.dataset.selectedPeriod || "all-time";
+  const selected = buttons.find(item => item.key === selectedKey) || buttons[0];
+  target.dataset.selectedPeriod = selected.key;
+  target.innerHTML = `<div class="admin-earnings-period-buttons" role="group" aria-label="Choose sales summary period">${buttons.map(item => `<button class="btn ${item.key === selected.key ? "btn-primary" : "btn-outline"}" type="button" data-earnings-period="${escapeHtml(item.key)}" aria-pressed="${item.key === selected.key}">${escapeHtml(item.label)}</button>`).join("")}</div><h3>${escapeHtml(selected.label)} total</h3><div class="admin-earnings-metrics"><article class="admin-earnings-metric"><span>Total sales</span><b>${escapeHtml(formatCurrency(selected.sales_bif))}</b></article><article class="admin-earnings-metric"><span>Gross profit (1.5x markup)</span><b>${escapeHtml(formatCurrency(selected.gross_profit_bif))}</b></article></div>`;
+  target.querySelectorAll("[data-earnings-period]").forEach(button => button.addEventListener("click", () => {
+    target.dataset.selectedPeriod = button.dataset.earningsPeriod;
+    renderAdminEarningsHistory(summary);
+  }));
+}
 function updatePharmacistSummary() {
   const total = products.length;
   const available = products.filter(product => product.is_available).length;
