@@ -605,6 +605,7 @@ body[data-staff-role="admin"] .admin-sales-grid>.manager-panel{min-height:0;heig
 .admin-filter-form input{min-width:145px;padding:8px 10px;border:1px solid #dce5e7;border-radius:7px;background:#fff;color:#183e4b;font:12px "DM Sans",sans-serif}
 .admin-earnings-panel .admin-filter-form input{min-width:145px;padding:8px 10px;font-size:12px}
 .admin-filter-form .btn{min-height:36px;padding:8px 12px;font-size:11px}
+.admin-earnings-period-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 14px}
 .admin-earnings-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .admin-earnings-metric{display:grid;gap:7px;min-width:0;padding:13px;border:1px solid #e5edf1;border-radius:9px;background:#f7fafb}
 .admin-earnings-metric span{color:#607783;font-size:10px;font-weight:700}
